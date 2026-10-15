@@ -1,0 +1,1243 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#090A0D">
+<link rel="icon" href="img/aries-logo.png" type="image/png">
+<meta property="og:url" content="https://ariesrunai.github.io/">
+<meta property="og:title" content="Aries 作品集">
+<!-- Sites 分享預覽圖 -->
+<meta property="og:image" content="https://ariesrunai.github.io/og.png?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ariesrunai.github.io/og.png?v=2">
+<meta property="og:description" content="用 AI 把內容產出變成可重複的流程。AI 應用 · 內容製作 · AI 導入作品集。">
+<title>Aries 作品集</title>
+<meta name="description" content="Aries｜用 AI 把內容產出變成可重複的流程。AI 應用 · 內容製作 · AI 導入作品集。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Chakra+Petch:wght@500;600;700&family=Orbitron:wght@600;800&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+img{max-width:100%}[hidden]{display:none!important}
+/* Layout: 遊戲 HUD 介面 — 深色戰術面板、直角切邊按鈕、角括號框線、段位徽章；只用青色＋琥珀兩個訊號色，保持簡約 */
+:root{
+  --bg:#090A0D; --panel:#12141A; --panel2:#191B22; --line:#292C35; --fg:#F2F2F4; --muted:#A3A6B0;
+  --red:#C6283D; --red-tx:#E8596B; --cyan:#28B8C7; --purple:#7655B8; --purple-tx:#9B82D9;
+  --accent:#C6283D; --accent-soft:rgba(198,40,61,.08); --amber:#28B8C7; --ink2:#28B8C7; --surface:#12141A; --volt:#28B8C7;
+  --gA:#3FAF7A; --gB:#28B8C7; --gC:#C9A23A; --gD:#C6283D;
+  --rgb:linear-gradient(90deg,#C6283D,#7655B8,#28B8C7);
+  --brand:"Orbitron","Chakra Petch",sans-serif;
+  --display:"Chakra Petch","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --mono:"Chakra Petch","IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --cut:10px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.75;margin:0;
+  background-image:linear-gradient(rgba(43,212,240,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(43,212,240,.035) 1px,transparent 1px);
+  background-size:48px 48px;background-attachment:fixed}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
+a{color:var(--red-tx)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.25;margin:0;font-weight:700}
+p{margin:0}
+.label{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.label::before{content:"// ";color:var(--muted)}
+
+/* HUD 框：角括號 */
+.panel,.consult,.contact,.svc,.shot .frame,.ba-frame{position:relative}
+.panel::before,.panel::after,.consult::before,.consult::after,.contact::before,.contact::after{content:"";position:absolute;width:14px;height:14px;pointer-events:none}
+.panel::before,.consult::before,.contact::before{top:-1px;left:-1px;border-top:2px solid var(--accent);border-left:2px solid var(--accent)}
+.panel::after,.consult::after,.contact::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--accent);border-right:2px solid var(--accent)}
+
+/* Header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:rgba(10,14,20,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--fg)}
+.brand b{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.12em;text-transform:uppercase}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{color:var(--muted);text-decoration:none;font-size:14px;padding:6px 12px;border-bottom:2px solid transparent}
+nav a:hover{color:var(--fg);border-bottom-color:var(--accent)}
+@media (max-width:640px){nav{display:none}}
+
+/* Hero */
+.hero{padding-block:72px 48px;display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:center}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:700;letter-spacing:.01em}
+.hero h1 em{font-style:normal;color:var(--accent);text-shadow:0 0 24px rgba(43,212,240,.35)}
+.hero .lead{margin-top:20px;max-width:34em;color:var(--muted);font-size:17px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.04em;text-decoration:none;color:var(--fg);background:var(--panel2);border:0;cursor:pointer;
+  clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut));box-shadow:inset 0 0 0 1px var(--line);transition:background .15s,color .15s}
+.btn:hover{background:#1E2B3B}
+.btn.primary{background:var(--accent);color:#04121A}
+.btn.primary:hover{background:#5FE0F5}
+.btn[disabled]{opacity:.6;cursor:wait}
+
+/* 玩家卡 */
+.player{background:var(--panel);border:1px solid var(--line);padding:22px;display:grid;gap:14px;position:relative}
+.player::before{content:"";position:absolute;top:-1px;left:-1px;right:-1px;height:3px;background:linear-gradient(90deg,var(--accent),transparent)}
+.player .pc-head{display:flex;gap:14px;align-items:center}
+.brand .personal-logo{width:44px;height:44px;object-fit:contain;flex:none}
+.player .pc-head .personal-logo{width:76px;height:76px;object-fit:contain;flex:none}
+.player .pc-name{font-family:var(--display);font-size:24px;font-weight:700;letter-spacing:.14em}
+.player .pc-role{font-size:13px;color:var(--muted)}
+.player dl{margin:0;display:grid;gap:8px}
+.player dl div{display:flex;justify-content:space-between;gap:12px;font-size:13px;border-top:1px dashed var(--line);padding-top:8px}
+.player dt{color:var(--muted);font-family:var(--mono);letter-spacing:.08em}
+.player dd{margin:0;text-align:right}
+.status{display:inline-flex;align-items:center;gap:6px;color:var(--gA);font-family:var(--mono);font-weight:600;letter-spacing:.08em}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gA);box-shadow:0 0 8px var(--gA)}
+@media (max-width:820px){.hero{grid-template-columns:1fr;padding-block:48px 32px}.player{max-width:420px}}
+
+/* Stats HUD */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat{padding:16px 18px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);min-width:0}
+.stat .n{font-family:var(--display);font-size:clamp(24px,3vw,32px);font-weight:700;font-variant-numeric:tabular-nums;color:var(--fg)}
+.stat .n small{font-size:.55em;color:var(--muted);font-weight:500}
+.stat p{font-size:13px;color:var(--muted);margin-top:2px}
+@media (max-width:720px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Audience switch */
+.aud{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:22px;font-size:14px;color:var(--muted)}
+.aud span{font-family:var(--mono);letter-spacing:.1em;font-size:12px}
+.aud button{font-family:var(--body);font-size:14px;padding:6px 14px;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer}
+.aud button:hover{border-color:var(--accent)}
+.aud button[aria-pressed="true"]{border-color:var(--amber);background:rgba(255,178,36,.12);color:var(--amber);font-weight:700}
+#flow{display:flex;flex-direction:column}
+
+/* Sections */
+section.block{padding-block:56px}
+.sec-head{display:grid;grid-template-columns:180px 1fr;gap:24px;margin-bottom:32px}
+.sec-head h2{font-size:clamp(26px,3.6vw,36px)}
+.sec-head p{color:var(--muted);margin-top:8px;max-width:36em}
+@media (max-width:720px){.sec-head{grid-template-columns:1fr;gap:6px}}
+
+/* Case */
+.case{display:grid;grid-template-columns:180px 1fr;gap:24px;padding-block:36px;border-top:1px solid var(--line)}
+.case-meta{display:flex;flex-direction:column;gap:6px}
+.case-meta .label{font-size:14px;color:var(--amber)}
+.case-meta .label::before{color:var(--amber)}
+.case-meta .kind{font-size:13px;color:var(--muted)}
+.case-body{min-width:0;display:flex;flex-direction:column;gap:20px}
+.case h3{font-size:clamp(22px,2.8vw,28px)}
+.case .sum{color:var(--muted);max-width:40em}
+.pbr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.pbr div{min-width:0;background:var(--panel);border:1px solid var(--line);padding:14px 16px}
+.pbr h4{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--accent);margin:0 0 6px;font-weight:700}
+.pbr p{font-size:14.5px;color:#C9D3DD}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:12px;font-family:var(--mono);letter-spacing:.04em;padding:3px 10px;border:1px solid var(--line);background:var(--panel);color:var(--muted)}
+@media (max-width:720px){.case{grid-template-columns:1fr;gap:10px}.pbr{grid-template-columns:1fr}}
+
+.panel{background:var(--panel);border:1px solid var(--line);padding:22px;min-width:0}
+.panel .cap{font-size:12px;color:var(--muted);margin-top:14px;font-family:var(--mono);letter-spacing:.04em}
+
+/* 段位徽章 A–D */
+.grades{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.grade{display:flex;gap:12px;align-items:flex-start;min-width:0}
+.stamp{flex:none;width:44px;height:48px;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:22px;color:#0A0E14;background:var(--g);
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);filter:drop-shadow(0 0 6px var(--g))}
+.grade b{display:block;font-size:15px}
+.grade > div > span{font-size:13px;color:var(--muted)}
+.gA{--g:var(--gA)}.gB{--g:var(--gB)}.gC{--g:var(--gC)}.gD{--g:var(--gD)}
+.grade b{color:var(--fg)}
+@media (max-width:820px){.grades{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* 經驗條 */
+.ba{display:grid;gap:12px;margin-top:22px}
+.bar-row{display:grid;grid-template-columns:72px 1fr 56px;gap:12px;align-items:center;font-size:14px}
+.bar-track{height:12px;background:#0B1119;border:1px solid var(--line);position:relative;overflow:hidden}
+.bar-track::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 9.6%,#0B1119 9.6% 10%)}
+.bar-fill{height:100%;background:var(--muted)}
+.bar-fill.after{background:linear-gradient(90deg,var(--accent),#7BEAFF);box-shadow:0 0 12px rgba(43,212,240,.5)}
+.bar-row .v{font-family:var(--display);font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+
+/* Flow diagram */
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
+.node{flex:1 1 120px;min-width:0;border:1px solid var(--line);padding:10px 12px;background:var(--panel2)}
+.node .who{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--muted)}
+.node b{display:block;font-size:14px;line-height:1.45;margin-top:2px}
+.node.claude .who{color:var(--accent)}
+.node.gpt .who{color:var(--amber)}
+.node.key{border-color:var(--accent);background:var(--accent-soft)}
+.arrow{align-self:center;color:var(--accent);font-family:var(--mono)}
+@media (max-width:640px){.flow{flex-direction:column}.arrow{transform:rotate(90deg);align-self:flex-start;margin-left:18px}}
+
+/* Arch diagram */
+.arch{display:grid;gap:10px}
+.arch .row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.arch .full{grid-column:1/-1}
+.arch .layer{border:1px solid var(--line);padding:10px 14px;background:var(--panel2);font-size:14px;min-width:0}
+.arch .layer .who{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--muted)}
+.arch .core{border-color:var(--accent);background:var(--accent-soft)}
+.arch .core .who{color:var(--accent)}
+.arch .deny{font-size:13px;color:var(--gD);margin-top:4px}
+.down{text-align:center;color:var(--accent);font-family:var(--mono);font-size:13px;line-height:1}
+
+/* Gallery */
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.shot{margin:0;min-width:0}
+.shot .frame{aspect-ratio:1/1;max-width:100%;overflow:hidden;border:1px solid var(--line);background:var(--panel);transition:border-color .2s}
+.shot:hover .frame{border-color:var(--accent)}
+.shot img{width:100%;height:100%;object-fit:contain;display:block}
+.shot .crop{position:absolute;left:10px;bottom:10px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;background:rgba(10,14,20,.85);color:var(--accent);padding:3px 8px;border:1px solid var(--line)}
+.shot figcaption{margin-top:10px;font-size:14px}
+.shot figcaption span{display:block;color:var(--muted);font-size:13px}
+@media (max-width:640px){.gallery{grid-template-columns:1fr}}
+
+/* Services */
+.svc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.svc div{background:var(--panel);border:1px solid var(--line);padding:20px;min-width:0;transition:border-color .2s}
+.svc div:hover{border-color:var(--accent)}
+.svc h3{font-family:var(--body);font-size:16px;font-weight:700}
+.svc p{font-size:14px;color:var(--muted);margin-top:6px}
+@media (max-width:820px){.svc{grid-template-columns:1fr}}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:24px;counter-reset:s;padding:0;margin-bottom:0}
+.steps li{list-style:none;counter-increment:s;border-top:2px solid var(--accent);padding-top:10px;font-size:14px;min-width:0}
+.steps li::before{content:"STEP 0" counter(s);display:block;font-family:var(--mono);font-weight:600;letter-spacing:.1em;font-size:11px;color:var(--accent)}
+.steps li b{display:block;font-size:15px}
+.steps li span{color:var(--muted);font-size:13px}
+@media (max-width:820px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.note{font-size:14px;color:var(--muted);margin-top:22px}
+
+/* Timeline */
+.tl{display:grid;gap:0}
+.tl-item{display:grid;grid-template-columns:180px 1fr;gap:24px;padding-block:20px;border-top:1px solid var(--line)}
+.tl-item .when{font-family:var(--display);font-weight:600;font-size:15px;color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.tl-item h3{font-family:var(--body);font-size:17px;font-weight:700}
+.tl-item p{font-size:15px;color:var(--muted);margin-top:4px;max-width:44em}
+.tl-item .links{display:flex;gap:16px;margin-top:8px;font-size:14px;flex-wrap:wrap}
+@media (max-width:720px){.tl-item{grid-template-columns:1fr;gap:4px}}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.tools .tag{font-size:13px;padding:5px 12px}
+
+/* Expandable detail */
+details.more{border-top:1px dashed var(--line);padding-top:14px}
+details.more summary{cursor:pointer;font-weight:700;font-size:15px;color:var(--accent);list-style:none;display:inline-flex;align-items:center;gap:8px}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"▸";font-family:var(--mono);transition:transform .2s}
+details.more[open] summary::before{transform:rotate(90deg)}
+.more-body{display:grid;gap:18px;margin-top:16px}
+.more-body h5{font-size:14px;margin:0 0 4px;font-family:var(--body);color:var(--amber)}
+.more-body p,.more-body li{font-size:14.5px;color:var(--muted)}
+.more-body ul{margin:0;padding-left:1.2em}
+.chal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.chal > div{min-width:0;background:var(--panel);border:1px solid var(--line);border-top:2px solid var(--amber);padding:12px 14px;font-size:14px;color:var(--muted)}
+.chal b{display:block;font-size:14px;color:var(--fg);margin-bottom:4px}
+@media (max-width:820px){.chal{grid-template-columns:1fr}}
+
+/* Before / after */
+.ba-wrap{display:grid;gap:10px}
+.ba-frame{max-width:100%;aspect-ratio:1024/640;overflow:hidden;border:1px solid var(--line);user-select:none;touch-action:pan-y;--pos:50%;cursor:ew-resize}
+.ba-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.ba-frame .top{clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
+.ba-line{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;margin-left:-1px;background:var(--accent);box-shadow:0 0 10px var(--accent);pointer-events:none}
+.ba-knob{position:absolute;top:50%;left:var(--pos);width:36px;height:36px;margin:-18px 0 0 -18px;background:var(--accent);color:#04121A;display:grid;place-items:center;font-family:var(--mono);font-weight:700;font-size:14px;pointer-events:none;
+  clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.ba-tag{position:absolute;top:10px;font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.08em;padding:3px 8px;color:#0A0E14;pointer-events:none}
+.ba-tag.l{left:10px;background:var(--gD)}.ba-tag.r{right:10px;background:var(--gA)}
+.ba-range{width:100%;accent-color:var(--accent)}
+.ba-notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;font-size:13.5px}
+.ba-notes div{min-width:0;padding:8px 12px;background:var(--panel2);border:1px solid var(--line)}
+.ba-notes b{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--gD);display:block}
+.ba-notes div:nth-child(2) b{color:var(--gA)}
+@media (max-width:640px){.ba-notes{grid-template-columns:1fr}}
+
+/* Consult featured */
+.consult{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;background:linear-gradient(135deg,rgba(43,212,240,.08),transparent 60%),var(--panel);border:1px solid var(--accent);padding:28px;margin-bottom:12px}
+.consult > div{min-width:0}
+.consult .badge{display:inline-block;font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.12em;background:var(--amber);color:#0A0E14;padding:3px 10px}
+.consult h3{font-size:clamp(22px,2.6vw,26px);margin-top:10px}
+.consult p{color:var(--muted);font-size:15px;margin-top:8px}
+.consult ul{margin:10px 0 0;padding-left:1.2em;font-size:14.5px}
+.consult ul li{margin-top:2px}
+.consult ol{list-style:none;padding:0;margin:0;display:grid;gap:10px;counter-reset:c}
+.consult ol li{counter-increment:c;display:grid;grid-template-columns:30px 1fr;gap:10px;font-size:14.5px}
+.consult ol li::before{content:counter(c);width:28px;height:28px;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:13px;color:#04121A;background:var(--accent);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.consult ol li span{color:var(--muted);display:block;font-size:13px}
+@media (max-width:820px){.consult{grid-template-columns:1fr}}
+
+/* Contact */
+.contact{background:var(--panel);border:1px solid var(--line);padding:40px clamp(20px,5vw,52px);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:36px;align-items:start}
+.contact > div{min-width:0}
+.contact h2{font-size:clamp(26px,3.6vw,36px)}
+.contact p{color:var(--muted);margin-top:10px;max-width:30em}
+.mail{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mail a{font-family:var(--mono);font-size:17px;user-select:all;word-break:break-all;color:var(--accent)}
+.contact-side{display:grid;gap:14px;align-content:start}
+@media (max-width:720px){.contact{grid-template-columns:1fr}}
+footer{padding-block:36px 140px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin-top:24px}
+
+
+/* ===== Red Black Cyber Arena：黑灰 75%／暗紅 15%／RGB 8%（只用在細線、狀態燈、hover、局部光暈）===== */
+@keyframes pulse{50%{opacity:.35}}
+body{background-color:var(--bg);background-image:radial-gradient(ellipse 60% 40% at 85% 0%,rgba(198,40,61,.10),transparent 70%),linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:auto,56px 56px,56px 56px}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:40;background:repeating-linear-gradient(0deg,rgba(0,0,0,.10) 0 1px,transparent 1px 4px)}
+::selection{background:var(--red);color:#fff}
+
+header.top{background:rgba(9,10,13,.9);border-bottom:1px solid var(--line)}
+header.top::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--rgb);opacity:.55}
+.brand b{font-family:var(--brand);font-weight:800;letter-spacing:.2em}
+.sys{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--muted);display:inline-flex;align-items:center;gap:6px;margin-left:12px}
+.sys::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);animation:pulse 2.4s ease-in-out infinite}
+@media (max-width:820px){.sys{display:none}}
+nav a:hover{color:var(--fg);border-bottom-color:var(--red)}
+
+.label{color:var(--cyan)}
+.label::before{color:var(--muted)}
+.hero h1 em{color:var(--red-tx);text-shadow:0 0 18px rgba(198,40,61,.35)}
+.btn{background:var(--panel2);box-shadow:inset 0 0 0 1px var(--line)}
+.btn:hover{background:#20232C;box-shadow:inset 0 0 0 1px var(--cyan),0 0 14px rgba(40,184,199,.18)}
+.btn.primary{background:var(--red);color:#fff}
+.btn.primary:hover{background:#D8344A;box-shadow:0 0 16px rgba(198,40,61,.4)}
+
+/* 卡片：靜態框，只有左側 2px 狀態線帶色 */
+.player,.stat,.panel,.pbr div,.svc div,.chal > div,.consult,.contact{background:var(--panel);border:1px solid var(--line)}
+.player{border-left:2px solid var(--red)}
+.player::before{display:none}
+.player .pc-name{font-family:var(--brand);font-weight:800;letter-spacing:.2em}
+.status{color:#5FD39A}.status::before{background:#3FAF7A;box-shadow:0 0 6px #3FAF7A;animation:pulse 2.4s ease-in-out infinite}
+.stat{border-left:2px solid var(--red)}
+.stat:nth-child(2){border-left-color:var(--purple)}
+.stat:nth-child(3){border-left-color:var(--cyan)}
+.stat:nth-child(4){border-left-color:var(--red)}
+.stat .n{font-family:var(--brand);font-weight:800;color:var(--fg);text-shadow:none}
+.pbr div{border-left:2px solid var(--line)}
+.pbr div:nth-child(1){border-left-color:var(--red)}
+.pbr div:nth-child(2){border-left-color:var(--purple)}
+.pbr div:nth-child(3){border-left-color:var(--cyan)}
+.pbr h4{color:var(--muted)}
+.pbr p{color:#C9CBD2}
+.svc div{border-left:2px solid var(--line);transition:border-color .2s,background .2s}
+.svc div:hover{border-left-color:var(--cyan);background:var(--panel2)}
+.chal > div{border-top:1px solid var(--line);border-left:2px solid var(--purple)}
+.panel,.consult,.contact{box-shadow:none}
+.panel::before,.consult::before,.contact::before{border-color:var(--red)}
+.panel::after,.consult::after,.contact::after{border-color:var(--line)}
+.consult{border-left:2px solid var(--red);background:radial-gradient(ellipse 50% 70% at 0% 0%,rgba(198,40,61,.10),transparent 70%),var(--panel)}
+.consult .badge{background:var(--red);color:#fff}
+.consult ol li::before{background:var(--panel2);color:var(--cyan);box-shadow:inset 0 0 0 1px var(--line)}
+.case-meta .label,.case-meta .label::before{color:var(--red-tx)}
+.sec-head h2::after{content:"";display:block;height:2px;width:44px;margin-top:10px;background:var(--rgb)}
+.more-body h5{color:var(--cyan)}
+details.more summary{color:var(--red-tx)}
+.tl-item .when{color:var(--cyan)}
+.steps li{border-top:1px solid var(--line);position:relative}
+.steps li::after{content:"";position:absolute;left:0;top:-1px;width:28px;height:2px;background:var(--red)}
+.steps li::before{color:var(--cyan)}
+.node.key,.arch .core{border-color:var(--red);background:rgba(198,40,61,.08)}
+.arch .core .who,.node.claude .who{color:var(--red-tx)}
+.node.gpt .who{color:var(--cyan)}
+.arrow,.down{color:var(--muted)}
+.stamp{filter:none}
+.bar-fill.after{background:linear-gradient(90deg,var(--red),var(--purple));box-shadow:none}
+.shot:hover .frame{border-color:var(--red)}
+.shot .crop{color:var(--fg)}
+.ba-line{background:#fff;box-shadow:0 0 6px rgba(40,184,199,.6)}
+.ba-knob{background:var(--fg);color:#090A0D}
+.aud button[aria-pressed="true"]{border-color:var(--red);background:rgba(198,40,61,.12);color:var(--fg)}
+.mail a{color:var(--fg)}
+footer::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--rgb);opacity:.4}
+footer{position:relative;border-top:0}
+.protocol{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--muted);margin:0 0 10px}
+.bubble{border-top:2px solid var(--red)}
+.pet-tag{background:var(--red);color:#fff}
+.logo-glow{filter:drop-shadow(0 0 4px rgba(40,184,199,.55))}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+
+/* ===== FOL 小電視 ===== */
+@keyframes static{0%{background-position:0 0}100%{background-position:100px 60px}}
+@keyframes rec{50%{opacity:.3}}
+.tv-wrap{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;align-items:stretch}
+.tv{background:#0D0E12;border:1px solid var(--line);border-left:2px solid var(--red);padding:10px;display:grid;gap:8px;min-width:0}
+.tv-bar,.tv-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted)}
+.onair{display:inline-flex;align-items:center;gap:6px;color:var(--red-tx);font-weight:700}
+.onair::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 6px var(--red);animation:rec 1.8s ease-in-out infinite}
+.tv-screen{position:relative;aspect-ratio:16/9;max-width:100%;overflow:hidden;background:#050608;border:1px solid #1E2028}
+.tv-screen::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px),radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55))}
+.tv-screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.tv-play{position:absolute;inset:0;width:100%;border:0;cursor:pointer;color:var(--fg);display:grid;place-content:center;justify-items:center;gap:8px;font-family:var(--body);
+  background:radial-gradient(ellipse at 50% 40%,rgba(198,40,61,.22),transparent 60%),repeating-radial-gradient(circle at 30% 40%,rgba(255,255,255,.03) 0 1px,transparent 1px 3px),#08090C;animation:static 1.2s steps(6) infinite}
+.tv-play:hover .tv-tri{background:var(--red);border-color:var(--red)}
+.tv-tri{width:64px;height:44px;border:1px solid var(--line);background:rgba(18,20,26,.85);position:relative;transition:background .2s,border-color .2s;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.tv-tri::after{content:"";position:absolute;left:50%;top:50%;margin:-9px 0 0 -6px;border-left:16px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent}
+.tv-title{font-family:var(--display);font-weight:700;font-size:clamp(18px,2.4vw,24px);letter-spacing:.06em}
+.tv-sub{font-size:12px;color:var(--muted);font-family:var(--mono);letter-spacing:.1em}
+.tv-dots{display:inline-flex;gap:4px}.tv-dots i{width:6px;height:6px;border-radius:50%;background:var(--line)}
+.tv-dots i:nth-child(1){background:var(--red)}.tv-dots i:nth-child(2){background:var(--purple)}.tv-dots i:nth-child(3){background:var(--cyan)}
+.tv-side{display:grid;gap:10px;align-content:start;min-width:0}
+.tv-stat{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--purple);padding:12px 14px}
+.tv-stat:nth-child(2){border-left-color:var(--cyan)}.tv-stat:nth-child(3){border-left-color:var(--red)}
+.tv-stat b{display:block;font-family:var(--brand);font-weight:800;font-size:22px;font-variant-numeric:tabular-nums}
+.tv-stat span{font-size:13px;color:var(--muted)}
+.tv-links{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;padding-top:4px}
+.tv-note{font-size:12px;color:var(--muted);font-family:var(--body)}
+@media (max-width:820px){.tv-wrap{grid-template-columns:1fr}.tv-side{grid-template-columns:repeat(3,minmax(0,1fr))}.tv-links{grid-column:1/-1}}
+@media (max-width:520px){.tv-side{grid-template-columns:1fr}}
+
+/* ===== 雲月 導覽寵物 ===== */
+.pet{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:50;display:flex;flex-direction:column;align-items:flex-end;gap:6px;pointer-events:none}
+.pet > *{pointer-events:auto}
+.pet-body{position:relative;width:120px;height:130px;cursor:pointer;border:0;padding:0;background:none;transition:transform .9s cubic-bezier(.45,.05,.3,1)}
+.pet-body:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:12px}
+.sprite{width:120px;height:130px;background-image:url("img/yunyue.webp");background-size:960px 1430px;background-repeat:no-repeat;filter:drop-shadow(0 6px 8px rgba(0,0,0,.18))}
+.pet-shadow{position:absolute;left:50%;bottom:4px;width:62px;height:10px;margin-left:-31px;border-radius:50%;background:rgba(0,0,0,.14);z-index:-1}
+.pet-tag{font-size:12px;font-family:var(--mono);font-weight:600;letter-spacing:.08em;background:var(--accent);color:var(--fg);padding:3px 10px;border-radius:0;margin-right:16px;transition:opacity .3s}
+.pet.open .pet-tag{opacity:0}
+.bubble{width:min(290px,calc(100vw - 66px));background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:0;border-top:2px solid var(--accent);padding:14px 16px 12px;box-shadow:0 10px 30px rgba(0,0,0,.45);position:relative;margin-right:18px;transform-origin:bottom right;animation:pop .22s ease-out}
+.bubble::after{content:"";position:absolute;right:46px;bottom:-7px;width:12px;height:12px;background:var(--surface);border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.bubble .who{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--red-tx)}
+.bubble p{font-size:14.5px;line-height:1.65;margin-top:2px}
+.choices{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.choices button{font-family:var(--body);font-size:13px;padding:5px 11px;border-radius:0;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+.choices button:hover{border-color:var(--accent);color:var(--red-tx)}
+.bubble .x{position:absolute;top:6px;right:8px;border:0;background:none;color:var(--muted);font-size:18px;line-height:1;cursor:pointer;padding:4px}
+.pet.mini .pet-body{transform:translateY(70px) scale(.7)}
+.pet.mini .pet-tag{opacity:0}
+@media (max-width:640px){
+  .pet-body,.sprite{width:84px;height:91px}
+  .sprite{background-size:672px 1001px}
+  .bubble::after{right:30px}
+}
+@media (prefers-reduced-motion:reduce){.bubble{animation:none}.pet-body{transition:none}}
+/* Banner 參考首頁：文字與按鈕均為原生網頁元件 */
+#top{scroll-margin-top:120px}
+.hero{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px;padding-block:48px 36px}
+.hero-copy{min-width:0}
+.hero h1{font-size:clamp(34px,4.4vw,54px);line-height:1.35}
+.hero h1 em{text-shadow:none}
+.hero-art{position:relative;overflow:hidden;aspect-ratio:1.62;margin:0;border:1px solid var(--line);align-self:center;min-width:0}
+.hero-art img{position:absolute;right:0;bottom:0;width:185%;max-width:none;height:auto}
+.hero .btn{clip-path:none;border-radius:8px;padding:14px 22px}
+.guide-trigger{clip-path:none;border-radius:8px;white-space:nowrap;padding:10px 14px}
+.top .wrap{flex-wrap:wrap}
+.top .brand{flex:none}
+.top nav{margin-left:auto}
+.top .sys{display:none}
+.hero + .player{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);align-items:center;margin-bottom:20px;max-width:none}
+.hero + .player dl{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 22px}
+.hero + .player .pc-head .personal-logo{width:62px;height:62px}
+@media(max-width:820px){
+ .hero{grid-template-columns:1fr;gap:26px;padding-block:24px 28px}
+ .hero-art{order:-1;width:100%}
+ .hero h1{font-size:clamp(32px,6vw,48px)}
+ .hero + .player{grid-template-columns:1fr}
+ .hero + .player dl{grid-template-columns:1fr}
+ .top nav{order:3;width:100%;justify-content:center;margin:0;display:flex}
+ .top nav a{padding:4px 8px;font-size:13px}
+ .guide-trigger{margin-left:auto}
+}
+
+/* 共用萌寵：內容外的專用停靠軌道，移動只改 transform */
+:root{--pet-rail:112px;--pet-width:84px;--pet-height:91px}
+main > .wrap,footer > .wrap{max-width:1080px;width:calc(100% - var(--pet-rail));margin-left:auto;margin-right:var(--pet-rail)}
+.pet{left:0;top:0;right:auto;bottom:auto;width:var(--pet-width);height:var(--pet-height);display:block;z-index:8;transition:transform .85s cubic-bezier(.22,.61,.36,1);visibility:hidden}
+.pet[data-ready]{visibility:visible}
+.pet-body,.sprite{width:var(--pet-width);height:var(--pet-height)}
+.pet-body{min-width:44px;min-height:44px;transition:none}
+.sprite{background-size:calc(var(--pet-width) * 8) calc(var(--pet-height) * 11)}
+.pet-shadow{width:60%;left:20%;margin:0;height:6px}
+.pet-tag{display:none}
+#petGuideSlot{scroll-margin-top:140px}
+#petGuideSlot:has(.bubble:not([hidden])){padding-block:16px}
+#petGuideSlot .bubble{width:100%;max-width:600px;margin:0 0 0 auto;animation:none}
+#petGuideSlot .bubble::after{display:none}
+#petGuideSlot .bubble .who{font-size:14px}
+#petGuideSlot .choices button{min-height:44px;font-size:14px}
+#petGuideSlot .x{min-width:44px;min-height:44px;top:0;right:0}
+#hero,.block{scroll-margin-top:140px}
+@media(min-width:821px) and (max-width:1199px){:root{--pet-rail:84px;--pet-width:64px;--pet-height:69.333px}}
+@media(max-width:820px){
+ :root{--pet-rail:58px;--pet-width:40px;--pet-height:43.333px}
+ main > .wrap,footer > .wrap{padding-inline:14px}
+ .hero h1{font-size:clamp(28px,6.5vw,40px)}
+ .hero .cta .btn{padding:12px 15px;font-size:14px}
+ .player{padding:16px}
+ .player .pc-head{gap:10px}
+ .player .pc-name{font-size:21px}
+ .hero + .player .pc-head .personal-logo{width:48px;height:48px}
+ .player dl div{flex-wrap:wrap;gap:4px 10px}
+ .player dd{text-align:left}
+}
+@media(prefers-reduced-motion:reduce){.pet{transition:none!important}}
+
+
+/* Aries Gothic wordmark, paired with the existing ram emblem. */
+.brand .aries-wordmark,.player .pc-name{
+ font-family:"UnifrakturCook","Old English Text MT","Palatino Linotype",serif;
+ font-weight:700;letter-spacing:.025em;text-transform:none;
+ color:#E7EDF6;background:linear-gradient(180deg,#FFFFFF 8%,#DCE6F3 36%,#8798AE 51%,#EDF4FF 67%,#B1C3D9 100%);
+ -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+ filter:drop-shadow(0 1px 0 #26384F) drop-shadow(0 0 5px rgba(157,189,224,.14));
+}
+.brand .aries-wordmark{font-size:32px;line-height:1.15}
+.player .pc-name{font-size:36px;line-height:1.2}
+@media(max-width:640px){.brand .aries-wordmark{font-size:28px}.player .pc-name{font-size:32px}}
+@media(forced-colors:active){.brand .aries-wordmark,.player .pc-name{background:none;-webkit-text-fill-color:CanvasText;filter:none}}
+
+
+/* Readable labels for headline metrics. */
+.stat p{font-size:clamp(15px,1.5vw,17px);font-weight:700;line-height:1.65;color:#EFF3FA;margin-top:10px;letter-spacing:.02em}
+.stat .n small{color:#D9E2EF;font-weight:600}
+.stat .stat-up{display:inline-block;color:#66DCC0;font-size:.8em;margin-left:.16em;vertical-align:.04em;-webkit-text-fill-color:#66DCC0}
+
+
+/* Four distinct, high-contrast metric accents. */
+.stats .stat:nth-child(1){--metric-color:#FF9FAF}
+.stats .stat:nth-child(2){--metric-color:#CEB2FF}
+.stats .stat:nth-child(3){--metric-color:#75E1F0}
+.stats .stat:nth-child(4){--metric-color:#81E8B3}
+.stats .stat{border-left:3px solid var(--metric-color)}
+.stats .stat .n,.stats .stat .n small,.stats .stat p,.stats .stat .stat-up{
+ color:var(--metric-color);-webkit-text-fill-color:var(--metric-color);
+}
+.stats .stat .n{text-shadow:0 0 16px color-mix(in srgb,var(--metric-color) 18%,transparent)}
+
+
+.my-role{margin:24px 0;padding:18px 22px;border-left:3px solid var(--cyan,#75e1f0);background:rgba(117,225,240,.06);border-radius:0 12px 12px 0}
+.my-role h4{margin:0 0 8px;color:#75e1f0;font-size:16px}
+.my-role p{margin:0;line-height:1.8}
+.service-details>summary{cursor:pointer;color:#75e1f0;padding:16px 0;font-weight:700}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+
+#lab[hidden],[data-lab-link][hidden]{display:none!important}
+.role-card-demo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0 24px}
+.role-card-demo>div{padding:20px;border:1px solid rgba(117,225,240,.3);border-radius:12px;background:rgba(117,225,240,.04)}
+.consistency-demo h4,.handoff-example h5{color:#75e1f0;margin:0 0 12px}
+.role-card-demo p{line-height:1.9}
+.table-scroll{overflow-x:auto;max-width:100%}
+.foreshadow-table{width:100%;min-width:620px;border-collapse:collapse;text-align:left;font-size:14px}
+.foreshadow-table th,.foreshadow-table td{padding:14px;border-bottom:1px solid rgba(117,225,240,.2);vertical-align:top}
+.foreshadow-table thead{color:#75e1f0;background:rgba(117,225,240,.06)}
+.foreshadow-table caption{text-align:left;color:var(--muted);padding:0 0 12px}
+.pbr>div{min-width:0}
+.handoff-example{margin-top:20px}.handoff-example h5{font-size:14px;line-height:1.6}
+.handoff-example pre{max-width:100%;overflow-x:auto;padding:16px;background:rgba(0,0,0,.28);border:1px solid rgba(117,225,240,.2);border-radius:10px;font-size:12px;line-height:1.8;color:#bdeef5}
+.handoff-example .cap{font-size:12px;line-height:1.8}
+.lab-project{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,1fr);gap:24px;align-items:center}
+.lab-poses{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}.lab-poses figure{margin:0;text-align:center}.lab-poses figcaption{font-size:13px;color:#75e1f0;margin-top:10px}
+.lab-pose{width:96px;height:104px;background:url('img/yunyue.webp') 0 0/768px 1144px no-repeat;filter:drop-shadow(0 6px 8px rgba(0,0,0,.18))}
+.lab-pose.move{background-position:0 -104px}.lab-pose.greet{background-position:0 -312px}
+@media(max-width:820px){.lab-project{grid-template-columns:1fr}.role-card-demo{grid-template-columns:1fr}}
+.research-limit{border-left-color:var(--amber);background:rgba(40,184,199,.10)}
+.research-limit h4{color:var(--amber);font-size:18px}.research-limit p{color:var(--fg);font-size:16px;line-height:1.8}
+</style>
+<link rel="stylesheet" href="/updates.css">
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Aries 首頁">
+      <img class="personal-logo" src="img/aries-logo.png" alt="" width="56" height="56">
+      <b class="aries-wordmark">Aries</b><span class="sys">SYSTEM ONLINE</span>
+    </a>
+    <nav aria-label="頁面導覽">
+      <a href="#cases">專案案例</a>
+      <a href="#works">視覺作品</a>
+      <a href="#lab" data-lab-link>實驗室</a>
+      <a href="#services">合作服務</a>
+      <a href="#about">相關經歷</a>
+      <a href="#updates">更新日誌</a>
+      <a href="#contact">聯絡</a>
+    </nav>
+    <button class="btn primary guide-trigger" type="button" aria-controls="bubble">點我導覽</button>
+  </div>
+</header>
+
+<div id="petGuideSlot" class="wrap"></div>
+<main id="top">
+  <div class="wrap">
+    <section id="hero" class="hero" aria-label="Aries 首頁介紹">
+      <div class="hero-copy">
+        <p class="label">AI 應用 · 內容製作 · AI 導入</p>
+        <h1 style="margin-top:14px">懂玩家、會辦活動，<br>用 AI 讓營運更有效率。</h1>
+        <p class="lead">我是 Aries。用生成式 AI 製作商業海報與社群內容，並把「這張能不能用」這種主觀判斷，整理成品質標準、交接格式與工作流程，讓產出穩定、可交接、可擴充。</p>
+        <div class="cta">
+          <a class="btn primary" href="#cases">看專案案例</a>
+          <a class="btn" href="#contact">合作洽詢</a>
+        </div>
+        <div class="aud" role="group" aria-label="依你的身分調整頁面順序">
+          <span>你是：</span>
+          <button type="button" data-aud="game" aria-pressed="true">遊戲公司</button>
+          <button type="button" data-aud="ai" aria-pressed="false">AI 專案</button>
+          <button type="button" data-aud="client" aria-pressed="false">想找人合作</button>
+        </div>
+      </div>
+      <figure class="hero-art">
+        <img src="img/aries-banner.png" alt="雲月在掛有藍色水晶的 AI 工作室，趴在印有 Aries Logo 的筆電後方。" width="1983" height="793" fetchpriority="high">
+      </figure>
+    </section>
+      <div class="player" aria-label="個人資訊卡">
+        <div class="pc-head"><img class="personal-logo" src="img/aries-logo.png" alt="" width="56" height="56"><div><div class="pc-name">Aries</div><div class="pc-role">AI 應用 · 內容製作 · AI 導入</div></div></div>
+        <dl>
+          <div><dt>STATUS</dt><dd><span class="status">OPEN</span>｜尋找遊戲營運／專案執行、AI 專案相關職位</dd></div>
+          <div><dt>MAIN</dt><dd>AI 視覺品管 · 內容流程設計</dd></div>
+          <div><dt>TOOLS</dt><dd>ChatGPT · Claude · Canva</dd></div>
+          <div><dt>BASE</dt><dd>台灣</dd></div>
+        </dl>
+      </div>
+
+
+    <div class="stats" role="list">
+      <div class="stat" role="listitem"><div class="n">40<small>%</small>→≈0</div><p>需重新生成比例</p></div>
+      <div class="stat" role="listitem"><div class="n">60–80<small> 張</small></div><p>商業視覺產出量（月）</p></div>
+      <div class="stat" role="listitem"><div class="n">A–D</div><p>四級品質分級標準</p></div>
+      <div class="stat" role="listitem"><div class="n" aria-label="10,000 人以上，社群成長"><span>10,000</span><span class="stat-up" aria-hidden="true">↑</span></div><p>從零建立的社群規模</p></div>
+    </div>
+
+    <div id="flow">
+    <!-- CASES -->
+    <section class="block" id="cases">
+      <div class="sec-head">
+        <p class="label">Case Studies</p>
+        <div>
+          <h2>專案案例</h2>
+          <p>每個案例都寫清楚三件事：遇到什麼問題、怎麼設計解法、最後改變了什麼。</p>
+        </div>
+      </div>
+
+      <article class="case" data-mission="04">
+        <div class="case-meta">
+          <p class="label">Mission 04</p>
+          <p class="kind">社群經營 · 活動統籌<br>從零到百人實體賽事</p>
+        </div>
+        <div class="case-body">
+          <h3>FOL 生命之火：玩家社群與線下賽事</h3>
+          <p class="sum">語音平台停止服務後，《黎明死線》玩家少了集中交流的地方。我和實況主、社群夥伴一起建立 Discord 社群，再把線上的熱度延伸成線下賽事。</p>
+          <div class="tv-wrap">
+            <div class="tv" id="folTv">
+              <div class="tv-bar"><span class="onair">ON AIR</span><span>CH.07 · FOL 生命之火 賽事紀錄</span></div>
+              <div class="tv-screen" id="tvScreen">
+                <button class="tv-play" id="tvPlay" type="button" aria-label="播放 FOL 生命之火賽事紀錄">
+                  <span class="tv-tri" aria-hidden="true"></span>
+                  <span class="tv-title">FOL 生命之火</span>
+                  <span class="tv-sub">點擊播放比賽現場（一）</span>
+                </button>
+              </div>
+              <div class="tv-foot"><span>SRC · YouTube @fol7930</span><span class="tv-dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+            </div>
+            <div class="tv-side">
+              <div class="tv-stat"><b>10,000+</b><span>暑假一個月的社群規模</span></div>
+              <div class="tv-stat"><b>100+</b><span>賽事當日到場人數</span></div>
+              <div class="tv-stat"><b>NT$3,000</b><span>場地租金，以自己的直播收益支付</span></div>
+              <div class="tv-links">
+                <a href="https://www.youtube.com/@fol7930" target="_blank" rel="noopener">YouTube 頻道 ↗</a>
+                <a href="https://www.twitch.tv/ariestv" target="_blank" rel="noopener">Twitch ariestv ↗</a>
+              </div>
+            </div>
+          </div>
+          <div class="my-role"><h4>我的角色</h4><p>活動統籌。負責場地洽談與場勘、邀請實況主宣傳、遠端協調人力、現場設備備援（賽制由合作戰隊設計）</p></div>
+          <div class="pbr">
+            <div><h4>PROBLEM</h4><p>遊戲熱度上升、台灣玩家變多，但原本常用的語音平台停止服務，玩家缺少集中交流和比賽的空間。</p></div>
+            <div><h4>APPROACH</h4><p>擔任共同創辦人、活動統籌與直播主。協調活動流程（賽制由合作戰隊設計），邀請實況主宣傳，安排場地、主持與現場人力，並用 Discord 協調分散各地的成員。</p></div>
+            <div><h4>RESULT</h4><p>社群在暑假一個月內成長到破萬人；線下賽事當日到場超過百人，之後的直播與社群熱度也延續下去。</p></div>
+          </div>
+          <div class="tags"><span class="tag">社群經營</span><span class="tag">活動統籌</span><span class="tag">跨角色協作</span><span class="tag">現場應變</span></div>
+          <details class="more">
+            <summary>看完整案例：執行過程與現場應變</summary>
+            <div class="more-body">
+              <div>
+                <h5>執行過程</h5>
+                <ul>
+                  <li>需求觀察：發現玩家缺少交流空間與線下活動</li>
+                  <li>社群啟動：透過實況主與玩家導流，一個月內破萬人</li>
+                  <li>活動籌備：與合作戰隊確認賽制、找場地、電話聯絡、場勘，安排主持與人力</li>
+                  <li>宣傳與直播：串聯多位實況主推廣，用自己的 Twitch 收益墊付場租</li>
+                </ul>
+              </div>
+              <div class="chal">
+                <div><b>挑戰：開場前直播設備故障</b>導播電腦連不上 Twitch。因為事先準備了備用筆電，立即排查並回家取備機，在開場前排除問題。</div>
+                <div><b>挑戰：團隊成員分散各地</b>成員不在同一個城市，用 Discord 固定回報進度、分配任務，確保籌備進度一致。</div>
+                <div><b>挑戰：預算有限</b>沒有贊助的情況下，用直播收益支付場地租金，讓活動能如期舉辦。</div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="case" data-mission="06">
+        <div class="case-meta">
+          <p class="label">Mission 06</p>
+          <p class="kind">遊戲營運分析 · 玩家體驗<br>探索性研究（2026/10）</p>
+        </div>
+        <div class="case-body">
+          <h3>《三角洲行動》營運分析：撤離模式的風險不對稱</h3>
+          <div class="my-role"><h4>我的角色</h4><p>獨立研究。資料蒐集、評論分類設計、證據強度標示、改善方案規劃（評論分類以 AI 協助）</p></div>
+          <div class="pbr">
+            <div><h4>PROBLEM</h4><p>以公開資料對 Garena 代理的《三角洲行動》進行探索性研究，觀察撤離模式中一般玩家的體驗問題。</p></div>
+            <div><h4>APPROACH</h4><ul>
+              <li>整理 Steam 每月平均在線人數（2026/5–10），觀察到賽季中段約下滑 23%</li>
+              <li>用 AI 分類約 94 則玩家評論，對照官方安全公告與媒體報導</li>
+              <li>每項論點標示證據強度，證據不足的論點不納入</li>
+            </ul></div>
+            <div><h4>RESULT</h4><p>提出「風險分層配對」與「以風險管理為核心的新手引導」兩項方案，附成效指標與風險評估，作為後續驗證依據。</p></div>
+          </div>
+          <div class="my-role research-limit" aria-label="研究限制"><h4>研究限制｜待驗證的假設</h4><p>Steam 數據只反映部分 PC 玩家，不代表 Garena 代理版整體；在線人數下滑也不等於玩家流失，結論屬於待驗證的假設。</p></div>
+          <div class="tags"><span class="tag">遊戲營運分析</span><span class="tag">玩家行為觀察</span><span class="tag">證據強度標示</span><span class="tag">改善方案設計</span></div>
+        </div>
+      </article>
+
+      <article class="case" data-mission="05">
+        <div class="case-meta">
+          <p class="label">Mission 05</p>
+          <p class="kind">AI 內容管理 · 世界觀與角色一致性<br>個人創作專案（長篇小說《楚溙辰》，目前 27 章）</p>
+        </div>
+        <div class="case-body">
+          <h3>AI 長篇創作一致性系統</h3>
+          <div class="my-role"><h4>我的角色</h4><p>規劃整體寫作流程與一致性規則（角色卡、伏筆清單、續寫前檢查），章節與文件由 AI 協作產出</p></div>
+          <div class="pbr">
+            <div><h4>PROBLEM</h4><p>用 AI 續寫長篇小說時，章節一多就會出現設定矛盾、角色提前知道秘密、伏筆被提早揭露等問題。</p></div>
+            <div><h4>APPROACH</h4><p>角色卡拆成「固定區」（設定）與「狀態區」（每章更新）；區分「讀者已知」與「角色已知」，未揭露資訊列為硬性限制；建立開放中伏筆清單（埋設章節、目前進度、預計揭曉、寫手限制）與續寫前 5 項檢查表。</p></div>
+            <div><h4>RESULT</h4><p>已完成 27 章，角色卡與伏筆清單同步更新至最新章節。</p></div>
+          </div>
+          <div class="panel consistency-demo">
+            <p class="label">一致性管理示意｜非小說正文</p>
+            <div class="role-card-demo" aria-label="角色卡分為固定區與狀態區">
+              <div><h4>角色卡 · 固定區</h4><p>身分與背景<br>性格與行動原則<br>世界觀與能力限制</p><span class="tag">設定基準</span></div>
+              <div><h4>角色卡 · 狀態區</h4><p>當前處境與關係<br>讀者已知／角色已知<br>未揭露資訊與硬性限制</p><span class="tag">每章更新</span></div>
+            </div>
+            <h4>開放中伏筆清單</h4>
+            <div class="table-scroll" tabindex="0" role="region" aria-label="伏筆清單示意，可橫向捲動">
+              <table class="foreshadow-table"><caption>欄位結構示意，非小說實際設定</caption><thead><tr><th scope="col">伏筆名稱</th><th scope="col">埋設章節</th><th scope="col">目前進度</th><th scope="col">預計揭曉</th><th scope="col">寫手限制</th></tr></thead><tbody><tr><th scope="row">伏筆 A（示意）</th><td>第 N 章</td><td>僅提供線索</td><td>指定章節區間</td><td>揭曉前不得讓角色得知</td></tr></tbody></table>
+            </div>
+          </div>
+          <div class="tags"><span class="tag">AI 內容管理</span><span class="tag">角色一致性</span><span class="tag">伏筆追蹤</span><span class="tag">續寫前檢查</span></div>
+        </div>
+      </article>
+
+
+      <article class="case" data-mission="01">
+        <div class="case-meta">
+          <p class="label">Mission 01</p>
+          <p class="kind">AI 視覺 · 品質管理<br>實際工作專案</p>
+        </div>
+        <div class="case-body">
+          <h3>品牌 AI 海報品管系統</h3>
+          <p class="sum">為農機品牌製作社群海報與文案。AI 生圖速度快，但品牌混淆、產品外觀錯誤這類問題，靠肉眼一張張判斷既慢又不穩定，所以我把判斷方式整理成一套固定標準。</p>
+          <div class="my-role"><h4>我的角色</h4><p>獨立負責。需求確認、提示詞設計、制定 A–D 品管標準、人工修正、建立歸檔規則</p></div>
+          <div class="pbr">
+            <div><h4>PROBLEM</h4><p>初期約 40% 的海報需要重新生成（每 10 張約 4 張）。常見錯誤包含品牌混淆、產品結構走樣、型號貼紙錯誤，以及要仔細比對才看得出的細節瑕疵。</p></div>
+            <div><h4>APPROACH</h4><p>以官方產品圖為辨識基準，規定 AI 不可改動結構、Logo 與型號；再用 A–D 四級分類決定每張圖是直接交付、小修、重生還是退件。</p></div>
+            <div><h4>RESULT</h4><p>需重新生成的比例降至接近 0；目前每 10 張約 1–2 張僅需細部小修即可交付。搭配比例命名與版本封存規則，多品牌、多品項都用同一套標準交付。</p></div>
+          </div>
+          <div class="panel">
+            <div class="grades">
+              <div class="grade gA"><div class="stamp">A</div><div><b>直接交付</b><span>產品與品牌正確，版面完整</span></div></div>
+              <div class="grade gB"><div class="stamp">B</div><div><b>人工小修</b><span>瑕疵可控，修正後交付</span></div></div>
+              <div class="grade gC"><div class="stamp">C</div><div><b>重新生成</b><span>構圖或資訊層級需重做</span></div></div>
+              <div class="grade gD"><div class="stamp">D</div><div><b>退件</b><span>產品結構或品牌錯誤</span></div></div>
+            </div>
+            <div class="ba" aria-label="需重新生成比例導入前後比較">
+              <div class="bar-row"><span>導入前</span><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><span class="v">~40%</span></div>
+              <div class="bar-row"><span>導入後</span><div class="bar-track"><div class="bar-fill after" style="width:0%"></div></div><span class="v">≈0</span></div>
+            </div>
+            <p class="cap">重新生成比例 = C 級＋D 級張數 ÷ 總產出張數（個人工作紀錄估算）</p>
+          </div>
+          <div class="panel ba-wrap">
+            <p class="label" style="margin:0">實例：同一張海報，品管前後（局部）</p>
+            <div class="ba-frame" id="baFrame">
+              <img src="img/ba-after.jpg" alt="修正後：規格標示與引擎外觀正確" draggable="false">
+              <img class="top" src="img/ba-before.jpg" alt="AI 原始生成：規格標示錯誤、引擎面板出現亂碼" draggable="false">
+              <span class="ba-tag l">AI 原始生成</span><span class="ba-tag r">品管修正後</span>
+              <span class="ba-line"></span><span class="ba-knob">⇆</span>
+            </div>
+            <label for="baRange" class="cap" style="margin:0">拖曳滑桿比較前後</label>
+            <input class="ba-range" id="baRange" type="range" min="0" max="100" value="50">
+            <div class="ba-notes">
+              <div><b>找到的問題</b>EC-04 被標成「2 吋抽水機」；GP160、GX160 引擎面板上出現 AI 自己生成的亂碼貼紙。</div>
+              <div><b>修正結果</b>規格改回「1 吋」，引擎外觀依官方產品圖重新生成，其餘版面保持不變。</div>
+            </div>
+          </div>
+          <div class="tags"><span class="tag">AI 圖像生成</span><span class="tag">品質標準設計</span><span class="tag">品牌一致性</span><span class="tag">檔案版本管理</span></div>
+          <details class="more">
+            <summary>看完整案例：判斷順序與交付流程</summary>
+            <div class="more-body">
+              <div>
+                <h5>判斷順序：先看會不會出錯，再看好不好看</h5>
+                <ul>
+                  <li>品牌與產品是否正確？Logo、型號、產品結構有錯 → 直接列為 D 級退件</li>
+                  <li>錯誤能不能人工修正？可控的小瑕疵 → B 級，修完交付</li>
+                  <li>是不是構圖或資訊層級的結構問題？→ C 級，調整提示詞後重新生成</li>
+                </ul>
+              </div>
+              <div class="chal">
+                <div><b>挑戰：錯誤藏在細節裡</b>型號貼紙、規格數字這類錯誤，縮圖時看不出來。解法是交付前一律放大比對官方產品圖。</div>
+                <div><b>挑戰：多品牌容易混淆</b>同時處理多個品牌時，AI 會把 A 品牌的元素畫到 B 品牌產品上。解法是每次生成只給單一品牌的官方素材。</div>
+                <div><b>挑戰：版本越存越亂</b>同一主題有多個比例與版本。解法是固定命名「主題_比例_版本」，舊版移到封存資料夾，不直接刪除。</div>
+              </div>
+              <div>
+                <h5>交付流程</h5>
+                <p>需求與官方素材確認 → 生成與構圖 → A–D 品管 → 人工修正 → 命名與歸檔 → 排程發布</p>
+              </div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="case" data-mission="02">
+        <div class="case-meta">
+          <p class="label">Mission 02</p>
+          <p class="kind">多 AI 協作 · 自動化<br>MVP（模擬品牌資料）</p>
+        </div>
+        <div class="case-body">
+          <h3>雙 AI 社群內容生產線</h3>
+          <p class="sum">驗證「Claude 負責規劃與文案、GPT 負責生圖」的分工，能不能透過固定的資料格式，穩定產出一整個月可直接使用的 Facebook 內容。</p>
+          <div class="panel">
+            <div class="flow">
+              <div class="node"><span class="who">INPUT</span><b>月度產品＋活動資料</b></div>
+              <span class="arrow">→</span>
+              <div class="node claude"><span class="who">CLAUDE</span><b>內容日曆、文案、圖片需求</b></div>
+              <span class="arrow">→</span>
+              <div class="node key"><span class="who">JSON SCHEMA v1.1</span><b>雙方共用的交接格式</b></div>
+              <span class="arrow">→</span>
+              <div class="node gpt"><span class="who">GPT</span><b>依規格生成貼文圖片</b></div>
+              <span class="arrow">→</span>
+              <div class="node claude"><span class="who">CLAUDE</span><b>比對規格做圖片 QA</b></div>
+            </div>
+            <p class="cap">架構示意｜下一階段：串接 n8n 自動化與 Facebook 排程</p>
+          </div>
+          <div class="my-role"><h4>我的角色</h4><p>流程設計與驗證。決定 Claude 與 GPT 分工、規劃分階段測試、發現多商品欄位缺口並決定升級格式、制定 QA 規則（JSON 格式由 GPT 依我的需求產出）</p></div>
+          <div class="pbr">
+            <div><h4>PROBLEM</h4><p>多個 AI 之間靠自然語言交接，欄位常漏、格式不一，自動化工具也無法穩定讀取。</p></div>
+            <div><h4>APPROACH</h4><p>先用文字表格測 2 篇，確認分工可行後才升級為正式 JSON 格式；測試中發現「一篇貼文多個商品」的缺口，當場加上商品陣列欄位。</p><div class="handoff-example"><h5>交接格式範例（模擬資料）</h5><pre tabindex="0" aria-label="JSON 交接格式範例"><code>{
+  "post_id": "POST-20261003-01",
+  "content_type": "event_post",
+  "campaign_stage": "promotion",
+  "products": ["產品A", "產品B"],
+  "image_type": "product_combo",
+  "status": "ready_for_image"
+}</code></pre><p class="cap">8 種貼文類型、7 種行銷階段、8 個製作狀態皆為固定值；修改任何欄位需雙方同步，不能單方面變更。</p></div></div>
+            <div><h4>RESULT</h4><p>跑完 14 篇、8 種貼文類型的完整流程，產出可重複使用的交接格式、文案規格範本與雙 AI 同步回報機制。</p></div>
+          </div>
+          <div class="tags"><span class="tag">Multi-AI 協作</span><span class="tag">JSON Schema</span><span class="tag">內容日曆</span><span class="tag">Prompt 設計</span></div>
+          <details class="more">
+            <summary>看完整案例：遇到的問題與取捨</summary>
+            <div class="more-body">
+              <div class="chal">
+                <div><b>挑戰：文字表格交接不穩定</b>人看得懂，但欄位名稱和格式每次不同，自動化工具讀不了。改由 GPT 設計正式 JSON 格式，固定 8 種貼文類型、7 種活動階段與貼文編號規則，雙方都依這份格式交接。</div>
+                <div><b>挑戰：格式沒考慮多商品貼文</b>節慶貼文常同時推多個商品，原本的單一商品欄位放不下。第一輪只測 3 篇就發現，立刻加上商品陣列欄位升級到 v1.1，避免 14 篇全部送出後才整批重工。</div>
+                <div><b>挑戰：縮圖檢查會誤判</b>用縮圖比對時有 3 張被判定不符，放大確認後其實都符合規格。之後規定以放大檢視為準，省下不必要的重新生成。</div>
+              </div>
+              <div>
+                <h5>為什麼這樣取捨</h5>
+                <ul>
+                  <li>先用模擬品牌跑通流程，不等真實資料：這個 MVP（最小可行產品）要驗證的是流程本身</li>
+                  <li>先人工複製貼上交接，暫不接 n8n：分工和格式確認無誤，才值得投入自動化</li>
+                  <li>格式邊測邊改：實際測出來的問題，比事先猜測所有情況更有效率</li>
+                </ul>
+              </div>
+              <div>
+                <h5>下一步</h5>
+                <p>接上真實商品資料、串接 n8n 讓文案直接觸發生圖，最後補上 Facebook 自動排程。</p>
+              </div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="case" data-mission="03">
+        <div class="case-meta">
+          <p class="label">Mission 03</p>
+          <p class="kind">AI 導入 · 權限設計<br>可運作的網頁原型</p>
+        </div>
+        <div class="case-body">
+          <h3>企業部門 AI 助理原型</h3>
+          <p class="sum">企業直接開放通用聊天機器人，任何部門都可能問出其他部門的薪資或報價。這個原型示範如何在大型語言模型前面加一層規則，讓 AI 知道自己該答什麼、不該答什麼。</p>
+          <div class="panel">
+            <div class="arch">
+              <div class="layer full"><span class="who">USER</span><br>員工選擇部門助理後提問</div>
+              <div class="down">↓</div>
+              <div class="row">
+                <div class="layer"><span class="who">HR ASSISTANT</span><br>人資規則＋人資知識庫<p class="deny">問業務報價 → 拒答並轉介</p></div>
+                <div class="layer"><span class="who">SALES ASSISTANT</span><br>業務規則＋產品知識庫<p class="deny">問員工請假資料 → 拒答並說明</p></div>
+              </div>
+              <div class="down">↓</div>
+              <div class="layer full core"><span class="who">CORE RULES · 全域規則，使用者無法覆寫</span><br>身分邊界、跨部門資料隔離、不捏造資訊、需核准事項只建議不代決</div>
+              <div class="down">↓</div>
+              <div class="layer full"><span class="who">CLAUDE API</span><br>依規則做語意層級的權限判斷後回應</div>
+            </div>
+            <p class="cap">架構示意｜Next.js＋TypeScript＋Claude API，以 Claude Code 協作開發</p>
+          </div>
+          <div class="my-role"><h4>我的角色</h4><p>需求定義與架構決策。設計三層規則架構、撰寫部門規則、規劃並驗收雙向測試（程式由 Claude Code 協作實作）</p></div>
+          <div class="pbr">
+            <div><h4>PROBLEM</h4><p>通用 AI 助理沒有部門邊界，有跨部門資訊外洩與越權回答的風險。</p></div>
+            <div><h4>APPROACH</h4><p>分成全域規則、部門規則、部門知識庫三層。先用固定回應驗證資料流，確認架構正確後才接真實模型。</p></div>
+            <div><h4>RESULT</h4><p>雙向跨部門測試通過：HR 問業務價格、Sales 問人事資料，都被正確拒答並附上轉介建議。</p></div>
+          </div>
+          <div class="tags"><span class="tag">AI Solution Design</span><span class="tag">權限控制</span><span class="tag">Claude API</span><span class="tag">Next.js</span></div>
+          <details class="more">
+            <summary>看完整案例：遇到的問題與取捨</summary>
+            <div class="more-body">
+              <div class="chal">
+                <div><b>挑戰：兩個部門的規則檔搞混</b>HR 與 Sales 都有同名的規則檔和知識庫檔，下載時被自動加上流水號，分不清哪份屬於哪個部門。改用終端機指令直接寫入正確路徑，不再靠肉眼辨識檔名。</div>
+                <div><b>挑戰：接上模型後還是顯示假回應</b>環境變數已經設定，但呼叫模型的程式其實還沒改，加上瀏覽器快取。明確要求修改呼叫邏輯並清除快取後，成功切換為真實回應。</div>
+                <div><b>驗證方式</b>做雙向跨部門測試：HR 問產品價格、Sales 問員工請假資料，兩邊都要被拒答，並說明原因、建議轉介窗口。</div>
+              </div>
+              <div>
+                <h5>為什麼這樣取捨</h5>
+                <ul>
+                  <li>先用固定回應驗證架構，再接真實模型：避免一開始就卡在 API 申請與費用設定</li>
+                  <li>不做多代理、複雜檢索或單一登入：原則是「能跑 → 完整 → 複雜」，先驗證核心概念</li>
+                  <li>使用模擬知識庫：這是概念驗證階段，重點是權限邏輯，不是資料整合</li>
+                </ul>
+              </div>
+              <div>
+                <h5>下一步</h5>
+                <p>擴充到財務、客服等更多部門，加入對話紀錄與人工審核介面，並評估讓知識庫隨業務資料即時更新。</p>
+              </div>
+            </div>
+          </details>
+        </div>
+      </article>
+    </section>
+
+    <!-- WORKS -->
+    <section class="block" id="works">
+      <div class="sec-head">
+        <p class="label">Visual Works</p>
+        <div>
+          <h2>商業視覺作品</h2>
+          <p>農機品牌社群海報。以原始方形比例展示，重點放在版面設計：資訊層級、產品編排、賣點圖示與多機型比較。</p>
+        </div>
+      </div>
+      <div class="gallery">
+        <figure class="shot"><div class="frame"><img src="img/visual-01.png" alt="引擎機組雙機型展示，搭配品牌識別與功能圖示" loading="lazy" width="1254" height="1254"></div><figcaption>主標層級與品牌組合<span>引擎機組雙機型展示，搭配品牌識別與功能圖示</span></figcaption></figure>
+        <figure class="shot"><div class="frame"><img src="img/visual-02.png" alt="抽水機依口徑分區，建立清楚的產品資訊層級" loading="lazy" width="1254" height="1254"></div><figcaption>多機型資訊編排<span>抽水機依口徑分區，建立清楚的產品資訊層級</span></figcaption></figure>
+        <figure class="shot"><div class="frame"><img src="img/visual-03.png" alt="電動割草車左右對照，整合產品特色與適用情境" loading="lazy" width="1254" height="1254"></div><figcaption>雙機型差異比較<span>電動割草車左右對照，整合產品特色與適用情境</span></figcaption></figure>
+        <figure class="shot"><div class="frame"><img src="img/visual-04.png" alt="電池園藝工具搭配產品型號與功能圖示，呈現品牌系列感" loading="lazy" width="1254" height="1254"></div><figcaption>產品主視覺與賣點圖示<span>電池園藝工具搭配產品型號與功能圖示，呈現品牌系列感</span></figcaption></figure>
+      </div>
+      <p class="note">同一主題會延伸成方形、3:4、9:16、3:2 等比例，對應貼文、限時動態與橫式廣告。更多作品可在合作洽詢時另行提供。</p>
+    </section>
+
+    <!-- LAB -->
+    <section class="block" id="lab">
+      <div class="sec-head"><p class="label">Laboratory</p><div><h2>實驗室</h2><p>原創角色與互動實驗。</p></div></div>
+      <div class="panel lab-project">
+        <div><h3>原創角色動畫「雲月」</h3><p>9 組動作、57 張動作影格，另有 16 個視線方向（共 73 張有效影格），依使用者操作狀態觸發不同動作，目前作為本網站的導覽角色。</p><div class="tags"><span class="tag">原創角色</span><span class="tag">動作影格</span><span class="tag">互動導覽</span></div></div>
+        <div class="lab-poses" aria-label="使用網站現有雲月素材展示動作影格">
+          <figure><div class="lab-pose" role="img" aria-label="雲月待機動作影格"></div><figcaption>待機</figcaption></figure>
+          <figure><div class="lab-pose move" role="img" aria-label="雲月移動動作影格"></div><figcaption>移動</figcaption></figure>
+          <figure><div class="lab-pose greet" role="img" aria-label="雲月招呼動作影格"></div><figcaption>招呼</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="block" id="services">
+      <div class="sec-head">
+        <p class="label">Services</p>
+        <div>
+          <h2>合作服務</h2>
+          <p>求職期間以全職職位為優先，亦可討論單次專案合作。</p>
+        </div>
+      </div>
+      <details class="service-details" id="servicesDetails"><summary>查看合作服務</summary>
+      <div class="consult">
+        <div>
+          <span class="badge">AI 導入諮詢</span>
+          <h3>想開始用 AI，不知道從哪裡下手？</h3>
+          <p>適合個人工作者與小團隊。一次約 60–90 分鐘的線上討論，會後提供一份「AI 導入建議」，讓你帶走可以馬上執行的下一步。</p>
+          <ul>
+            <li>哪些工作適合交給 AI、哪些不適合</li>
+            <li>建議使用的工具與分工方式</li>
+            <li>第一步可以馬上開始做的事</li>
+            <li>需要注意的風險：資料外洩、品質把關</li>
+          </ul>
+          <p style="font-size:14px">這套方法來自我自己每天用三個 AI 分工完成工作的經驗，實際做法可以看 <a href="#cases">專案案例</a>。</p>
+        </div>
+        <ol aria-label="諮詢流程">
+          <li><div><b>事前問卷</b><span>先了解你的工作內容與痛點</span></div></li>
+          <li><div><b>線上討論</b><span>60–90 分鐘，一起拆解哪些環節能導入 AI</span></div></li>
+          <li><div><b>交付導入建議</b><span>會後 3 天內提供一份書面建議</span></div></li>
+          <li><div><b>一次追問回覆</b><span>開始執行後遇到問題，可以再問一次</span></div></li>
+        </ol>
+      </div>
+      <div class="svc">
+        <div><h3>AI 商業海報與商品視覺</h3><p>以官方產品圖為基準，產出社群貼文、商品介紹與多比例版位素材。</p></div>
+        <div><h3>社群貼文與廣告文案</h3><p>依品牌語氣規劃貼文類型、文案、Hashtag 與行動呼籲。</p></div>
+        <div><h3>AI 內容流程與 SOP 整理</h3><p>把你現在的 AI 使用方式整理成提示詞、品質標準與交接流程。</p></div>
+        <div><h3>素材歸檔與版本管理規劃</h3><p>設計雲端資料夾分類、檔名規則與舊版封存方式。</p></div>
+        <div><h3>月度內容日曆規劃</h3><p>規劃一整個月的發文節奏與主題，避免斷更或整月硬賣商品。</p></div>
+        <div><h3>社群活動企劃</h3><p>線上社群經營與線下活動的規劃、宣傳與現場執行。</p></div>
+      </div>
+      <ol class="steps" aria-label="合作流程">
+        <li><b>需求確認</b><span>用途、版位、交付格式</span></li>
+        <li><b>報價與時程</b><span>依需求報價</span></li>
+        <li><b>製作初稿</b><span>依確認的方向產出</span></li>
+        <li><b>修改調整</b><span>依約定次數修正</span></li>
+        <li><b>交付歸檔</b><span>依比例與版本命名</span></li>
+      </ol>
+      </details>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="block" id="about">
+      <div class="sec-head">
+        <p class="label">Experience</p>
+        <div>
+          <h2>相關經歷</h2>
+          <p>2017 年起累積社群與內容經驗，橫跨電商、自媒體、社群經營與 AI 內容製作。目前正在準備 iPAS AI 應用規劃師認證。</p>
+        </div>
+      </div>
+      <div class="tl">
+        <div class="tl-item"><div class="when">2026</div><div><h3>社群內容與 AI 視覺製作｜農機設備品牌</h3><p>負責品牌社群經營、文案與 AI 海報製作，建立 A–D 品管標準與檔案版本管理規則。</p></div></div>
+        <div class="tl-item"><div class="when">2024 — 2026</div><div><h3>網路行銷企劃｜電商部門（農產品批發）</h3><p>電商網站商品上架與訂單營運，經營 Facebook、Instagram、Threads、LINE，撰寫文案並製作短影音。</p></div></div>
+        <div class="tl-item"><div class="when">2023 — 2024</div><div><h3>網路行銷企劃助理｜祥泰自媒體</h3><p>自媒體腳本、角色定位、影片剪輯與曝光導流。</p></div></div>
+        <div class="tl-item"><div class="when">2017 — 2020</div><div><h3>共同創辦人｜實況社群「FOL 生命之火」</h3><p>與實況主共同建立 Discord 玩家社群，暑假一個月成長破萬人；籌辦線下電競賽事，當日到場超過百人，負責場地、宣傳與現場設備備援（賽制由合作戰隊設計）。</p><div class="links"><a href="https://www.youtube.com/@fol7930" target="_blank" rel="noopener">YouTube 賽事紀錄 ↗</a><a href="https://www.twitch.tv/ariestv" target="_blank" rel="noopener">Twitch 頻道 ↗</a></div></div></div>
+      </div>
+      <div class="tools" aria-label="常用工具">
+        <span class="tag">ChatGPT</span><span class="tag">Claude</span><span class="tag">Claude Code</span><span class="tag">AI 圖像生成</span><span class="tag">Canva</span><span class="tag">Photoshop</span><span class="tag">Google Drive</span><span class="tag">Excel / Word / PowerPoint</span><span class="tag">短影音剪輯</span>
+      </div>
+    </section>
+
+    </div><!-- /flow -->
+
+    <section class="block" id="updates" data-updates data-limit="3">
+      <div class="sec-head"><p class="label">Update Log</p><div><h2>更新日誌</h2><p>重要通知、作品與專案進度。</p></div></div>
+      <p class="update-status" data-update-status role="status" aria-live="polite">載入更新中…</p>
+      <div class="update-grid" data-update-list></div>
+      <div class="cta"><a class="btn" href="/updates.html">查看全部 ↗</a></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="block" id="contact">
+      <div class="contact">
+        <div>
+          <h2>有內容或 AI 導入想聊聊？</h2>
+          <p>歡迎來信說明需求，我會在兩個工作天內回覆。</p>
+
+        </div>
+        <div class="contact-side">
+          <p style="margin:0">直接來信：</p>
+          <div class="mail">
+            <a id="mail" href="mailto:ariesrunai@gmail.com">ariesrunai@gmail.com</a>
+            <button class="btn" id="copy" type="button">複製</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<footer><div class="wrap"><div class="protocol">Aries PROTOCOL / SYSTEM ONLINE</div>© 2026 Aries · 視覺作品僅為展示用途，品牌與商標屬原權利人所有。<br>導覽角色「雲月」為 Aries 以 AI 生成並製作動畫的原創角色。</div></footer>
+
+<aside class="pet" id="pet" aria-label="導覽角色雲月">
+  <div class="bubble" id="bubble" role="status" aria-live="polite" hidden>
+    <button class="x" id="petClose" type="button" aria-label="收起雲月">×</button>
+    <span class="who">雲月</span>
+    <p id="petText"></p>
+    <div class="choices" id="petChoices"></div>
+  </div>
+  <span class="pet-tag" id="petTag">點我導覽</span>
+  <button class="pet-body" id="petBody" type="button" aria-label="和雲月互動，開啟網站導覽">
+    <span class="pet-shadow"></span>
+    <div class="sprite" id="sprite"></div>
+  </button>
+</aside>
+
+<script>
+document.getElementById('copy').addEventListener('click',function(){
+  var b=this,t=document.getElementById('mail').textContent;
+  function done(){b.textContent='已複製';setTimeout(function(){b.textContent='複製'},1600)}
+  function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='已選取，請按複製'}
+  try{navigator.clipboard.writeText(t).then(done,sel)}catch(e){sel()}
+});
+
+/* 身分切換：調整區塊與案例順序 */
+(function(){
+  var ORDER={game:['cases','about','works','lab','services'],ai:['cases','about','works','lab','services'],client:['works','lab','services','cases','about']};
+  var MISSIONS={game:['04','06','01','02','05','03'],ai:['03','02','05','01','04','06'],client:['01','02','03','04','05','06']};
+  var btns=[].slice.call(document.querySelectorAll('[data-aud]'));
+  var cases=document.getElementById('cases'), cards={};
+  cases.querySelectorAll('[data-mission]').forEach(function(card){cards[card.dataset.mission]=card;});
+  function apply(k,scroll){
+    var o=ORDER[k];
+    ['cases','works','lab','services','about'].forEach(function(id){document.getElementById(id).style.order=o.indexOf(id);});
+    MISSIONS[k].forEach(function(n){cases.appendChild(cards[n]);});
+    document.getElementById('servicesDetails').open=k==='client';
+    document.getElementById('lab').hidden=k==='ai';
+    document.querySelectorAll('[data-lab-link]').forEach(function(link){link.hidden=k==='ai';});
+    btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.aud===k?'true':'false');});
+    if(scroll)document.getElementById(o[0]).scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.aud,true);});});
+  apply('game',false);
+})();
+
+/* 前後對比滑桿 */
+(function(){
+  var f=document.getElementById('baFrame'), r=document.getElementById('baRange');
+  if(!f) return;
+  function set(v){ v=Math.max(0,Math.min(100,v)); f.style.setProperty('--pos',v+'%'); r.value=v; }
+  r.addEventListener('input',function(){ set(+r.value); });
+  var drag=false;
+  function at(e){ var b=f.getBoundingClientRect(); set((e.clientX-b.left)/b.width*100); }
+  f.addEventListener('pointerdown',function(e){ drag=true; f.setPointerCapture(e.pointerId); at(e); });
+  f.addEventListener('pointermove',function(e){ if(drag) at(e); });
+  f.addEventListener('pointerup',function(){ drag=false; });
+  f.addEventListener('pointercancel',function(){ drag=false; });
+})();
+
+
+
+/* FOL 小電視：點擊後才載入 aries 確認的賽事影片 */
+(function(){
+  var btn=document.getElementById('tvPlay'), scr=document.getElementById('tvScreen');
+  if(!btn) return;
+  var VIDEO='hCn4XBZ6HPg';
+  btn.addEventListener('click',function(){
+    var f=document.createElement('iframe');
+    f.src='https://www.youtube-nocookie.com/embed/'+VIDEO+'?autoplay=1&rel=0';
+    f.title='DBD黎明死線生命盃 比賽影片現場（一）';
+    f.referrerPolicy='strict-origin-when-cross-origin';
+    f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen=true; f.loading='lazy';
+    scr.innerHTML=''; scr.appendChild(f);
+    var n=document.createElement('p'); n.className='tv-note';
+    n.innerHTML='畫面沒有出現的話，可以 <a href="https://www.youtube.com/watch?v=hCn4XBZ6HPg" target="_blank" rel="noopener">直接到 YouTube 觀看 ↗</a>';
+    scr.parentNode.appendChild(n);
+  });
+})();
+
+/* ===== 雲月 Anchor 導覽 MVP：保留圖集，無額外套件 ===== */
+(function(){
+  'use strict';
+  var LINES = {
+    hello:'你來啦～我是雲月！今天的作品集導覽，就交給我吧。',
+    cases:'五個任務都在這裡！先陪我看看，AI 海報怎麼一步步過關吧～',
+    works:'海報局部展示中～湊近看看排版和細節，寶藏就藏在這裡。',
+    lab:'這裡是實驗室～我的動作與互動導覽也在這裡展示！',
+    services:'想找 Aries 一起做點什麼？AI 導入諮詢在這裡，我替你帶路～',
+    about:'來看看 Aries 的冒險足跡～Mission 04 有小電視可以看喔！',
+    contact:'有想法就寄信給 Aries 吧～信箱在這裡，我幫你找到啦。',
+    bye:'那我先縮回小角落～想我了，就輕輕點一下。',
+    sleep:'唔……讓我瞇一下。醒來再陪你找靈感～'
+  };
+  // 擴充入口：每個裝置／區塊只設定軌道內的 x 偏移及可用高度比例。
+  var ANCHORS={
+    desktop:{hero:[0,.20],cases:[8,.48],works:[0,.30],lab:[0,.40],services:[8,.65],about:[0,.42],contact:[8,.74]},
+    tablet:{hero:[0,.24],cases:[4,.45],works:[0,.32],lab:[0,.40],services:[4,.60],about:[0,.40],contact:[4,.68]},
+    mobile:{hero:[0,.28],cases:[2,.42],works:[0,.34],lab:[0,.40],services:[2,.48],about:[0,.38],contact:[2,.52]}
+  };
+  // 語意狀態與圖片動畫分開，未來可在 renderState 接 Rive／Live2D。
+  var ANIM={idle:[0,6,5],move:[1,8,8],point:[10,8,5],greet:[3,4,5],sleep:[5,8,3]};
+  var pet=document.getElementById('pet'),body=document.getElementById('petBody'),
+      sprite=document.getElementById('sprite'),bubble=document.getElementById('bubble'),
+      text=document.getElementById('petText'),choices=document.getElementById('petChoices'),
+      closeBtn=document.getElementById('petClose'),slot=document.getElementById('petGuideSlot');
+  slot.appendChild(bubble);
+  var sections=['hero','cases','works','lab','services','about','contact'].map(function(id){return document.getElementById(id);});
+  var motion=matchMedia('(prefers-reduced-motion: reduce)'),reduce=motion.matches;
+  var active=null,mode=null,state='idle',frameTimer=null,poseTimer=null,settleTimer=null,sleepTimer=null,raf=0,lastX=null,lastY=null;
+  var idlePoses=[[0,6,5],[6,6,5],[7,6,5],[8,6,5],[9,8,5],[10,8,5]],lastIdlePose=-1;
+  var MENU=[['回到首頁','hero'],['看 AI 專案','cases'],['看海報作品','works'],['實驗室','lab'],['合作方式','services'],['Aries 的相關經歷','about'],['聯絡','contact']];
+  function frame(row,col){
+    sprite.style.backgroundPosition=(-col*sprite.offsetWidth)+'px '+(-row*sprite.offsetHeight)+'px';
+  }
+  function renderState(next){
+    clearInterval(frameTimer);clearTimeout(poseTimer);state=next;pet.dataset.state=next;
+    var a=ANIM[next],f=0;
+    if(next==='idle'&&!reduce){
+      var options=idlePoses.filter(function(pose){return pose[0]!==lastIdlePose;});
+      a=options[Math.floor(Math.random()*options.length)];lastIdlePose=a[0];
+      if(!document.hidden)poseTimer=setTimeout(function(){renderState('idle');},8000);
+    }
+    frame(a[0],0);
+    if(reduce||document.hidden) return;
+    frameTimer=setInterval(function(){f=(f+1)%a[1];frame(a[0],f);},1000/a[2]);
+  }
+  function restLater(){
+    clearTimeout(sleepTimer);
+    if(!reduce&&!document.hidden) sleepTimer=setTimeout(function(){renderState('sleep');},30000);
+  }
+  function chooseSection(){
+    var line=document.querySelector('header.top').getBoundingClientRect().bottom+
+      (innerHeight-document.querySelector('header.top').getBoundingClientRect().bottom)*.32;
+    var best=null,distance=Infinity;
+    // 依真實 DOM 座標判斷，兼容招募方／合作方的 CSS order。
+    sections.forEach(function(el){
+      if(el.hidden) return;
+      var r=el.getBoundingClientRect();
+      var d=r.top<=line&&r.bottom>=line?0:Math.min(Math.abs(r.top-line),Math.abs(r.bottom-line));
+      if(d<distance){best=el.id;distance=d;}
+    });
+    // 文件底部停留於聯絡區，避免短區塊永遠無法被偵測。
+    if(scrollY>0&&innerHeight+scrollY>=document.documentElement.scrollHeight-8) best='contact';
+    return best||'hero';
+  }
+  function update(){
+    raf=0;
+    if(document.hidden) return;
+    var nextMode=innerWidth>=1200?'desktop':innerWidth>820?'tablet':'mobile';
+    var id=chooseSection(),changed=id!==active||nextMode!==mode;
+    mode=nextMode;active=id;
+    pet.dataset.section=id;pet.dataset.device=mode;
+    var a=ANCHORS[mode][id],w=body.offsetWidth,h=body.offsetHeight;
+    var rail=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pet-rail'));
+    var top=document.querySelector('header.top').getBoundingClientRect().bottom+14;
+    var x=innerWidth-rail+(rail-w)/2+a[0];
+    var y=top+Math.max(0,innerHeight-top-h-20)*a[1];
+    x=Math.max(0,Math.min(x,innerWidth-w-4));
+    y=Math.max(top,Math.min(y,innerHeight-h-12));
+    if(x===lastX&&y===lastY) return;
+    var first=lastX===null;lastX=x;lastY=y;
+    if(first)pet.style.transition='none';
+    clearTimeout(settleTimer);
+    if(!first&&!reduce) renderState('move');
+    pet.style.transform='translate3d('+x+'px,'+y+'px,0)';pet.dataset.ready='true';
+    if(first){pet.getBoundingClientRect();requestAnimationFrame(function(){pet.style.transition='';});}
+    settleTimer=setTimeout(function(){
+      renderState(changed&&!reduce?'point':'idle');
+      settleTimer=setTimeout(function(){renderState('idle');restLater();},reduce?0:900);
+    },reduce||first?0:850);
+  }
+  function schedule(){if(!raf)raf=requestAnimationFrame(update);}
+  function hideGuide(){bubble.hidden=true;pet.classList.remove('open');}
+  function openGuide(){
+    clearTimeout(settleTimer);clearTimeout(sleepTimer);
+    renderState('greet');
+    text.textContent=LINES[active==='hero'?'hello':active]||LINES.hello;
+    choices.replaceChildren();
+    MENU.forEach(function(m){
+      if(document.getElementById(m[1]).hidden) return;
+      var b=document.createElement('button');b.type='button';b.textContent=m[0];
+      b.addEventListener('click',function(){hideGuide();document.getElementById(m[1]).scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});schedule();});
+      choices.appendChild(b);
+    });
+    bubble.hidden=false;pet.classList.add('open');
+    slot.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+    closeBtn.focus({preventScroll:true});
+    settleTimer=setTimeout(function(){renderState('idle');restLater();},reduce?0:1000);
+  }
+  body.addEventListener('click',openGuide);
+  document.querySelector('.guide-trigger').addEventListener('click',openGuide);
+  closeBtn.addEventListener('click',function(){hideGuide();document.querySelector('.guide-trigger').focus({preventScroll:true});schedule();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!bubble.hidden){hideGuide();document.querySelector('.guide-trigger').focus({preventScroll:true});schedule();}});
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',function(){
+    pet.style.transition='none';lastX=null;frame(ANIM[state][0],0);update();
+    requestAnimationFrame(function(){pet.style.transition='';});
+  },{passive:true});
+  document.querySelectorAll('[data-aud]').forEach(function(b){b.addEventListener('click',schedule);});
+  new ResizeObserver(schedule).observe(document.querySelector('main'));
+  motion.addEventListener('change',function(e){reduce=e.matches;clearTimeout(settleTimer);clearTimeout(sleepTimer);renderState('idle');lastY=null;schedule();});
+  document.addEventListener('visibilitychange',function(){
+    clearInterval(frameTimer);clearTimeout(poseTimer);clearTimeout(settleTimer);clearTimeout(sleepTimer);
+    if(!document.hidden){renderState('idle');restLater();schedule();}
+  });
+  renderState('idle');schedule();restLater();
+})();
+</script>
+
+<script src="/updates.js" defer></script>
+</body>
+</html>

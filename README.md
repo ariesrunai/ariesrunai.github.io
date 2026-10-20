@@ -16,3 +16,4 @@
 
 ## 交接紀錄
 - 2026-10-15：由 ChatGPT Sites 搬到 GitHub Pages（Claude）。移除舊的平台內建訪客統計，待之後改裝 GA4。
+- 2026-10-20：安裝 GA4（評估 ID：G-67135LKMFE，資源「Aries 作品集」），index.html 與 updates.html 的 <head> 皆已加入 gtag.js（Claude）。新增頁面時記得一併加入。

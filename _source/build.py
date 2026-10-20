@@ -1,5 +1,6 @@
 """Build GitHub Pages HTML from the shared source; Python standard library only."""
 from pathlib import Path
+import hashlib
 import re
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -70,6 +71,10 @@ for key in ["home", *pages]:
     # Only mark the link in the primary navigation, not repeated links elsewhere.
     nav = re.search(r'<nav\b.*?</nav>', html, re.S)[0]
     html = html.replace(nav, nav.replace(f'href="{url}"', f'href="{url}" aria-current="page"'))
+    # 共用樣式／程式加上內容版本號，更新後瀏覽器不會沿用舊快取。
+    for asset in ("site.css", "site.js", "updates.css", "updates.js"):
+        digest = hashlib.sha1((ROOT / asset).read_bytes()).hexdigest()[:8]
+        html = html.replace(f'"/{asset}"', f'"/{asset}?v={digest}"')
     html = "\n".join(line.rstrip() for line in html.splitlines()) + "\n"
     (ROOT / ("index.html" if key == "home" else key + ".html")).write_text(html)
 print("Built homepage and seven standalone pages.")

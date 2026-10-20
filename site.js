@@ -64,26 +64,36 @@ document.getElementById('copy')?.addEventListener('click',function(){
   window.addEventListener('hashchange',fromHash);
 })();
 
-/* 雲月 3D：點擊後才載入模型檢視器與 GLB（約 7MB） */
+/* 雲月 3D：點擊後才載入模型檢視器與 GLB（約 7MB），案例視窗與 IP 頁共用 */
 (function(){
-  var btn=document.getElementById('yy3dLoad'), stage=document.getElementById('yy3dStage');
-  if(!btn||!stage) return;
-  btn.addEventListener('click',function(){
-    btn.disabled=true; btn.textContent='載入中…';
-    var sc=document.createElement('script'); sc.type='module';
-    sc.src='/media/vendor/model-viewer-3.5.0.min.js';
-    sc.onload=function(){
-      var mv=document.createElement('model-viewer');
-      mv.setAttribute('src','/media/yunyue/yunyue-v2.glb');
-      mv.setAttribute('alt','雲月靜態 3D 模型，可拖曳旋轉、滾輪縮放');
-      mv.setAttribute('camera-controls',''); mv.setAttribute('auto-rotate',''); mv.setAttribute('shadow-intensity','0.6');
-      mv.setAttribute('exposure','1.05'); mv.className='yy-mv';
-      stage.innerHTML=''; stage.appendChild(mv);
-      var tip=document.createElement('p'); tip.className='cap'; tip.textContent='拖曳旋轉・滾輪或雙指縮放';
-      stage.appendChild(tip);
-    };
-    sc.onerror=function(){btn.disabled=false;btn.textContent='載入失敗，點此重試';};
-    document.head.appendChild(sc);
+  var btns=Array.from(document.querySelectorAll('.yy-3d-load'));
+  if(!btns.length) return;
+  var lib=null;
+  function loadLib(){
+    if(lib) return lib;
+    lib=new Promise(function(ok,fail){
+      if(customElements.get('model-viewer')) return ok();
+      var sc=document.createElement('script'); sc.type='module'; sc.src='/media/vendor/model-viewer-3.5.0.min.js';
+      sc.onload=function(){ok();}; sc.onerror=function(){lib=null;fail();};
+      document.head.appendChild(sc);
+    });
+    return lib;
+  }
+  btns.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var stage=btn.closest('.yy-3d-stage');
+      btn.disabled=true; btn.textContent='載入中…';
+      loadLib().then(function(){
+        var mv=document.createElement('model-viewer');
+        mv.setAttribute('src','/media/yunyue/yunyue-v2.glb');
+        mv.setAttribute('alt','雲月靜態 3D 模型，可拖曳旋轉、滾輪縮放');
+        mv.setAttribute('camera-controls',''); mv.setAttribute('auto-rotate',''); mv.setAttribute('shadow-intensity','0.6');
+        mv.setAttribute('exposure','1.05'); mv.className='yy-mv';
+        stage.innerHTML=''; stage.appendChild(mv);
+        var tip=document.createElement('p'); tip.className='cap'; tip.textContent='拖曳旋轉・滾輪或雙指縮放';
+        stage.appendChild(tip);
+      },function(){btn.disabled=false;btn.textContent='載入失敗，點此重試';});
+    });
   });
 })();
 
@@ -129,7 +139,7 @@ document.getElementById('copy')?.addEventListener('click',function(){
     hello:'你來啦～我是雲月！今天的作品集導覽，就交給我吧。',
     cases:'五個任務都在這裡！先陪我看看，AI 海報怎麼一步步過關吧～',
     works:'海報局部展示中～湊近看看排版和細節，寶藏就藏在這裡。',
-    lab:'這裡是實驗室～我的動作與互動導覽也在這裡展示！',
+    lab:'這裡是我的 IP 頁～動畫、貼圖和 3D 模型都在這裡！',
     services:'想找 Aries 一起做點什麼？AI 導入諮詢在這裡，我替你帶路～',
     updates:'網站的新消息在這裡～一起看看最近的進度吧。',
     about:'來看看 Aries 的冒險足跡～Mission 04 有小電視可以看喔！',
@@ -154,7 +164,7 @@ document.getElementById('copy')?.addEventListener('click',function(){
   var motion=matchMedia('(prefers-reduced-motion: reduce)'),reduce=motion.matches;
   var active=null,mode=null,state='idle',frameTimer=null,poseTimer=null,settleTimer=null,sleepTimer=null,raf=0,lastX=null,lastY=null;
   var idlePoses=[[0,6,5],[6,6,5],[7,6,5],[8,6,5],[9,8,5],[10,8,5]],lastIdlePose=-1;
-  var MENU=[['回到首頁','hero'],['看 AI 專案','cases'],['看海報作品','works'],['實驗室','lab'],['合作方式','services'],['Aries 的相關經歷','about'],['更新日誌','updates'],['聯絡','contact']];
+  var MENU=[['回到首頁','hero'],['看 AI 專案','cases'],['看海報作品','works'],['雲月 IP','lab'],['合作方式','services'],['Aries 的相關經歷','about'],['更新日誌','updates'],['聯絡','contact']];
   function frame(row,col){
     // Percentage offsets retain subpixel accuracy on narrow screens.
     sprite.style.backgroundPosition=(col/7*100)+'% '+(row/10*100)+'%';

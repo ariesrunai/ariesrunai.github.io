@@ -59,13 +59,15 @@ for key in ["hero", "cases", "works", "lab", "services", "about", "contact"]:
     def words(html):
         return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", html)).strip()
 
-    if key == "cases":
+    if key in ("cases", "lab"):
         # 2026-10-20 改為卡片＋詳情視窗：原本每段文字都必須仍存在（僅移除 Mission 編號）。
         new = words(section(source))
         for frag in re.split(r"<[^>]+>", section(baseline)):
             frag = re.sub(r"\s+", " ", frag).strip()
-            if frag and not re.fullmatch(r"Mission \d+", frag):
-                assert frag in new, ("cases text lost", frag)
+            # 2026-10-21 實驗室改名「雲月 IP」，舊標題文字刻意替換
+            renamed = {"Laboratory", "實驗室", "原創角色與互動實驗。"}
+            if frag and not re.fullmatch(r"Mission \d+", frag) and not (key == "lab" and frag in renamed):
+                assert frag in new, (key + " text lost", frag)
     else:
         assert words(section(baseline)) == words(section(source)), key
 

@@ -71,7 +71,7 @@ for key in ["hero", "cases", "works", "lab", "services", "about", "contact"]:
 
 assert not subprocess.check_output(
     ["git", "diff", "89e7c1488a6e393d38edf12fc5c603ec97cf9171", "--",
-     "img", "og.png", "updates.json", "updates.js", "updates.css"],
+     "img", "og.png", "updates.js", "updates.css"],
     cwd=ROOT,
 ), "Original assets or updates data changed"
 print("PASS: 8 pages; deterministic build; headings, IDs, links, GA4, original content/assets.")

@@ -485,6 +485,63 @@
           </div>
         </dialog>
       </article>
+      <article class="case" data-mission="08" id="case-yunyue">
+        <div class="case-card">
+          <div class="card-top"><span class="chip s-self">個人 IP 實作</span><span class="card-kind">AI 角色 IP · 2D／貼圖／3D</span></div>
+          <h3>雲月 IP：從 AI 角色設計到 3D 模型與貼圖</h3>
+          <p class="hook">從一張 AI 角色設計出發，延伸成網站導覽動畫、九宮格表情貼圖，以及可旋轉的 3D 模型。</p>
+          <ul class="kpis"><li><b>73 張</b><span>導覽動畫影格</span></li><li><b>9 款</b><span>表情貼圖</span></li><li><b>9 點</b><span>3D 僅付費生成一次</span></li></ul>
+          <p class="card-role"><span>角色</span>角色定位、方向決策、預算核准與成果驗收</p>
+          <button class="case-open" type="button" aria-haspopup="dialog" aria-controls="dlg-yunyue">看重點<span aria-hidden="true">→</span></button>
+        </div>
+        <dialog class="case-dialog" id="dlg-yunyue" aria-labelledby="dlg-yunyue-title">
+          <div class="dlg-head">
+            <div><p class="label">AI 角色 IP · 2D／貼圖／3D</p><h2 class="dlg-title" id="dlg-yunyue-title">雲月 IP：從 AI 角色設計到 3D 模型與貼圖</h2><p class="dlg-sub">個人 IP 實作（2026/10，持續延伸中）</p></div>
+            <button class="dlg-close" type="button" aria-label="關閉">×</button>
+          </div>
+          <div class="case-body">
+          <p class="sum">我不會繪圖，也不會 3D 軟體。這個專案想驗證：只靠描述需求、監督與驗收，能讓 AI 把一個原創角色做到多完整，同時控制成本與品質。</p>
+          <div class="panel yy-gallery">
+            <figure class="yy-wide"><img src="/media/yunyue/design-sheet.webp" alt="雲月角色設定圖：主視覺、三視圖、細節特寫、表情與動作展示、配色方案" width="1400" height="933" loading="lazy"><figcaption>角色設定圖｜牡羊角、異色瞳、三顆金鈴、粉金紋路</figcaption></figure>
+            <figure><img src="/media/yunyue/stickers.webp" alt="雲月九宮格表情貼圖：尊嘟假嘟、傻眼貓咪、心好累、誤闖天家等" width="1000" height="1000" loading="lazy"><figcaption>九宮格表情貼圖</figcaption></figure>
+            <figure class="yy-3d">
+              <div class="yy-3d-stage" id="yy3dStage">
+                <div class="yy-3d-pair"><img src="/media/yunyue/3d-front.webp" alt="雲月 3D 模型正面預覽" width="600" height="477" loading="lazy"><img src="/media/yunyue/3d-back.webp" alt="雲月 3D 模型背面預覽" width="600" height="477" loading="lazy"></div>
+                <button class="btn yy-3d-load" id="yy3dLoad" type="button">載入可旋轉的 3D 模型（約 7MB）</button>
+              </div>
+              <figcaption>靜態 3D 模型（GLB）｜正面與背面，可載入後自行旋轉</figcaption>
+            </figure>
+          </div>
+          <div class="my-role"><h4>我的角色</h4><p>定義角色定位與風格、逐版提出修改方向、比較報價並核准付費、依檢查清單驗收成果；圖像由 ChatGPT 生成，3D 由 AI 代理操作 Higgsfield（Tripo H3.1）完成。</p></div>
+          <div class="pbr">
+            <div><h4>PROBLEM</h4><p>想做一個可延伸的原創 IP，但沒有繪圖與 3D 建模能力，也不想在付費 3D 生成上反覆試錯浪費預算。</p></div>
+            <div><h4>APPROACH</h4><ul>
+              <li>角色設計：以「萌系＋牡羊元素」為方向，逐版調整異色瞳、虎紋、鈴鐺與毛量</li>
+              <li>延伸應用：做成網站導覽動畫（9 組動作）與九宮格表情貼圖</li>
+              <li>3D 化：先產出四肢清楚的建模參考圖，比較報價後只付費生成一次</li>
+              <li>驗收：逐角度檢查四肢、異色瞳、雙角、三顆鈴鐺與尾巴</li>
+            </ul></div>
+            <div><h4>RESULT</h4><p>完成角色設定圖、9 款貼圖、73 張動畫影格，以及 94,670 個三角面的靜態 3D 模型；背面花紋另做局部修補版，未追加付費。</p></div>
+          </div>
+          <div class="my-role research-limit" aria-label="目前限制"><h4>目前限制｜誠實揭露</h4><p>3D 為單張圖 AI 重建：細毛是雕塑化表面、飾品與接合處有簡化；背面花紋是依風格補作，不是原設定逐筆還原；未驗證可直接 3D 列印。</p></div>
+          <div class="tags"><span class="tag">AI 角色設計</span><span class="tag">IP 延伸</span><span class="tag">3D 生成</span><span class="tag">成本控管</span><span class="tag">成果驗收</span></div>
+          <details class="more">
+            <summary>看完整案例：3D 化的過程與取捨</summary>
+            <div class="more-body">
+              <div class="chal">
+                <div><b>挑戰：主圖姿勢會讓 3D 重建出錯</b>原主圖有一隻抬起的前掌，容易被重建成多餘肢體。先請 AI 依設定衍生一張四肢清楚的坐姿建模參考圖，再拿去生成，原圖保留不改。</div>
+                <div><b>取捨：兩個方案差 4 倍價格</b>Meshy 7 報價 38 點、Tripo H3.1 報價 9 點，帳戶只有 10 點。這次目標是驗證可行性，所以選 Tripo，只生成一次。</div>
+                <div><b>挑戰：背面沒有花紋</b>生成結果背面與尾巴缺少紋路。保留原版，另做 v2 局部修補：加上貼合表面的花紋層並柔化頸後，沒有再付費重生成。</div>
+              </div>
+              <div>
+                <h5>這個案例想證明的事</h5>
+                <p>不會某個軟體不等於做不出成果：先定義清楚要的結果，讓 AI 換工具執行，自己負責方向、預算與驗收，並把限制講清楚。</p>
+              </div>
+            </div>
+          </details>
+          </div>
+        </dialog>
+      </article>
       <article class="case" data-mission="07" id="case-ai-system">
         <div class="case-card">
           <div class="card-top"><span class="chip s-self">個人實作｜持續迭代</span><span class="card-kind">AI 治理 · 流程設計</span></div>

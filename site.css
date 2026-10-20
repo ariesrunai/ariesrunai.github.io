@@ -596,3 +596,16 @@ html.dlg-lock{overflow:hidden}
 
 .code-link{margin-top:12px;display:flex;gap:12px}.code-link a{color:var(--cyan);font-size:14px}
 .demo-panel{display:grid;gap:12px}.demo-gif{display:block;width:100%;max-width:704px;height:auto;border:1px solid var(--line)}
+
+/* 雲月 IP 案例 */
+.yy-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.yy-gallery figure{margin:0;display:grid;gap:8px;min-width:0}
+.yy-gallery img{display:block;width:100%;height:auto;border:1px solid var(--line)}
+.yy-gallery figcaption{font-size:13px;color:var(--muted)}
+.yy-wide{grid-column:1/-1}
+.yy-3d-stage{position:relative;display:grid;gap:10px;align-content:start;background:#22213a;border:1px solid var(--line);padding:10px}
+.yy-3d-pair{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.yy-3d-pair img{border:0}
+.yy-3d-load{justify-self:center}
+.yy-mv{width:100%;height:360px;background:#22213a;--poster-color:transparent}
+@media(max-width:700px){.yy-gallery{grid-template-columns:1fr}.yy-mv{height:300px}}

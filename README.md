@@ -50,3 +50,4 @@ GitHub Pages 的 `pages build and deployment` 工作流程會從 `main` 建置�
 - 2026-10-20：安裝 GA4（評估 ID：G-67135LKMFE，資源「Aries 作品集」），index.html 與 updates.html 的 <head> 皆已加入 gtag.js（Claude）。新增頁面時記得一併加入。
 - 2026-10-20：案例改為「卡片摘要＋詳情視窗」（`.case-grid`／`<dialog class="case-dialog">`，網址 `#case-xxx` 可直接開啟）；首頁新增「我怎麼導入 AI」5 步驟（`#method`，遊戲公司模式排在探索區之後）；新增案例「個人 AI 作業系統」（data-mission 07）與「規劃中的專案」區塊。check.py 改為確認案例原文逐段保留（Claude）。
 - 2026-10-20：部門 AI 助理案例加入實際操作錄影 `media/dept-ai-demo.gif`（本機原型錄製，示範第一層規則攔截跨部門提問）與原型程式碼連結 github.com/ariesrunai/aster-ai-dept-assistant（Claude）。
+- 2026-10-21：新增案例「雲月 IP」（data-mission 08）：素材在 `media/yunyue/`（原檔在 Mac「文件/Codex/2026-10-11/yunyue-3d-model」），3D 模型 `yunyue-v2.glb` 點擊才載入，使用自架的 `media/vendor/model-viewer-3.5.0.min.js`（Apache-2.0）。更新日誌新增 10/20、10/21 兩則；check.py 不再鎖定 updates.json（Claude）。

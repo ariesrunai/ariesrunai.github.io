@@ -11,7 +11,7 @@ document.getElementById('copy')?.addEventListener('click',function(){
 
 /* 身分偏好跨頁保存；儲存不可用時仍可正常瀏覽。 */
 (function(){
-  var MISSIONS={game:['04','06','01','02','05','03','07'],ai:['03','07','02','05','01','04','06'],client:['01','02','03','07','04','05','06']};
+  var MISSIONS={game:['04','06','08','01','02','05','03','07'],ai:['03','07','02','05','01','08','04','06'],client:['01','08','02','03','07','04','05','06']};
   var ORDER={game:['cases','about','works','lab','services','updates','contact'],ai:['cases','about','works','services','lab','updates','contact'],client:['works','lab','services','cases','about','updates','contact']};
   var btns=Array.from(document.querySelectorAll('[data-aud]'));
   var cases=document.querySelector('#cases .case-grid')||document.getElementById('cases'), cards={};
@@ -62,6 +62,29 @@ document.getElementById('copy')?.addEventListener('click',function(){
   }
   fromHash();
   window.addEventListener('hashchange',fromHash);
+})();
+
+/* 雲月 3D：點擊後才載入模型檢視器與 GLB（約 7MB） */
+(function(){
+  var btn=document.getElementById('yy3dLoad'), stage=document.getElementById('yy3dStage');
+  if(!btn||!stage) return;
+  btn.addEventListener('click',function(){
+    btn.disabled=true; btn.textContent='載入中…';
+    var sc=document.createElement('script'); sc.type='module';
+    sc.src='/media/vendor/model-viewer-3.5.0.min.js';
+    sc.onload=function(){
+      var mv=document.createElement('model-viewer');
+      mv.setAttribute('src','/media/yunyue/yunyue-v2.glb');
+      mv.setAttribute('alt','雲月靜態 3D 模型，可拖曳旋轉、滾輪縮放');
+      mv.setAttribute('camera-controls',''); mv.setAttribute('auto-rotate',''); mv.setAttribute('shadow-intensity','0.6');
+      mv.setAttribute('exposure','1.05'); mv.className='yy-mv';
+      stage.innerHTML=''; stage.appendChild(mv);
+      var tip=document.createElement('p'); tip.className='cap'; tip.textContent='拖曳旋轉・滾輪或雙指縮放';
+      stage.appendChild(tip);
+    };
+    sc.onerror=function(){btn.disabled=false;btn.textContent='載入失敗，點此重試';};
+    document.head.appendChild(sc);
+  });
 })();
 
 /* 前後對比滑桿 */

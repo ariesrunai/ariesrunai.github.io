@@ -2,7 +2,21 @@
   var id=location.hash.slice(1), routes=['cases','works','lab','services','about','updates','contact'];
   if((location.pathname==='/'||location.pathname==='/index.html')&&routes.includes(id))location.replace('/'+id+'.html');
 })();
+/* GA4 互動事件：事件名稱直接帶內容（如 view_case_delta），不用另外設定自訂維度就能在「事件」報表看到 */
+function ariesTrack(name,params){try{if(typeof gtag==='function')gtag('event',name,params||{});}catch(e){}}
+(function(){
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href]');
+    if(!a) return;
+    var h=a.getAttribute('href')||'';
+    if(h.indexOf('mailto:')===0) ariesTrack('contact_email_click');
+    else if(/\.pdf($|\?)/i.test(h)) ariesTrack('pdf_open',{file:h.split('/').pop()});
+    else if(/github\.com/.test(h)) ariesTrack('github_click',{link_url:h});
+  },true);
+})();
+
 document.getElementById('copy')?.addEventListener('click',function(){
+  ariesTrack('contact_email_copy');
   var b=this,t=document.getElementById('mail').textContent;
   function done(){b.textContent='已複製';setTimeout(function(){b.textContent='複製'},1600)}
   function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='已選取，請按複製'}
@@ -27,7 +41,7 @@ document.getElementById('copy')?.addEventListener('click',function(){
     try{sessionStorage.setItem('aries-audience',k);}catch(e){}
     if(scroll){var hub=document.getElementById('explore');if(hub)hub.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}
   }
-  btns.forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.aud,true);});});
+  btns.forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.aud,true);ariesTrack('audience_'+b.dataset.aud);});});
   var initial='game';try{initial=sessionStorage.getItem('aries-audience')||initial;}catch(e){}
   apply(initial,false);
 })();
@@ -41,6 +55,7 @@ document.getElementById('copy')?.addEventListener('click',function(){
     if(typeof d.showModal==='function')d.showModal();else d.setAttribute('open','');
     document.documentElement.classList.add('dlg-lock');
     var art=d.closest('.case');
+    if(art&&art.id)ariesTrack('view_'+art.id.replace(/-/g,'_'),{via:push?'click':'link'});
     if(push&&art&&art.id){try{history.replaceState(null,'','#'+art.id);}catch(e){}}
   }
   function close(d){if(d.open){if(typeof d.close==='function')d.close();else d.removeAttribute('open');}}
@@ -92,6 +107,7 @@ document.getElementById('copy')?.addEventListener('click',function(){
         stage.innerHTML=''; stage.appendChild(mv);
         var tip=document.createElement('p'); tip.className='cap'; tip.textContent='拖曳旋轉・滾輪或雙指縮放';
         stage.appendChild(tip);
+        ariesTrack('yunyue_3d_load');
       },function(){btn.disabled=false;delete btn.dataset.started;btn.textContent='載入失敗，點此重試';});
   }
   var io='IntersectionObserver' in window ? new IntersectionObserver(function(entries){
@@ -125,6 +141,7 @@ document.getElementById('copy')?.addEventListener('click',function(){
   if(!btn) return;
   var VIDEO='hCn4XBZ6HPg';
   btn.addEventListener('click',function(){
+    ariesTrack('fol_video_play');
     var f=document.createElement('iframe');
     f.src='https://www.youtube-nocookie.com/embed/'+VIDEO+'?autoplay=1&rel=0';
     f.title='DBD黎明死線生命盃 比賽影片現場（一）';

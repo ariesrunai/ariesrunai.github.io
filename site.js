@@ -11,14 +11,17 @@ document.getElementById('copy')?.addEventListener('click',function(){
 
 /* 身分偏好跨頁保存；儲存不可用時仍可正常瀏覽。 */
 (function(){
-  var MISSIONS={game:['04','06','01','02','05','03'],ai:['03','02','05','01','04','06'],client:['01','02','03','04','05','06']};
+  var MISSIONS={game:['04','06','01','02','05','03','07'],ai:['03','07','02','05','01','04','06'],client:['01','02','03','07','04','05','06']};
   var ORDER={game:['cases','about','works','lab','services','updates','contact'],ai:['cases','about','works','services','lab','updates','contact'],client:['works','lab','services','cases','about','updates','contact']};
   var btns=Array.from(document.querySelectorAll('[data-aud]'));
-  var cases=document.getElementById('cases'), cards={};
+  var cases=document.querySelector('#cases .case-grid')||document.getElementById('cases'), cards={};
   if(cases)cases.querySelectorAll('[data-mission]').forEach(function(card){cards[card.dataset.mission]=card;});
+  var method=document.getElementById('method'), explore=document.getElementById('explore');
   function apply(k,scroll){
     if(!MISSIONS[k])k='game';
     if(cases)MISSIONS[k].forEach(function(n){if(cards[n])cases.appendChild(cards[n]);});
+    /* 首頁：AI 專案與合作模式先看導入方法；遊戲公司模式放在探索區之後 */
+    if(method&&explore){if(k==='game')explore.after(method);else explore.before(method);}
     ORDER[k].forEach(function(id,i){var card=document.querySelector('[data-page="'+id+'"]');if(card)card.style.order=i;});
     btns.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.aud===k));});
     try{sessionStorage.setItem('aries-audience',k);}catch(e){}
@@ -27,6 +30,38 @@ document.getElementById('copy')?.addEventListener('click',function(){
   btns.forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.aud,true);});});
   var initial='game';try{initial=sessionStorage.getItem('aries-audience')||initial;}catch(e){}
   apply(initial,false);
+})();
+
+/* 案例卡片：點「看重點」開啟詳情視窗；網址 #case-xxx 可直接開啟 */
+(function(){
+  var dialogs=Array.from(document.querySelectorAll('.case-dialog'));
+  if(!dialogs.length) return;
+  function open(d,push){
+    if(!d||d.open) return;
+    if(typeof d.showModal==='function')d.showModal();else d.setAttribute('open','');
+    document.documentElement.classList.add('dlg-lock');
+    var art=d.closest('.case');
+    if(push&&art&&art.id){try{history.replaceState(null,'','#'+art.id);}catch(e){}}
+  }
+  function close(d){if(d.open){if(typeof d.close==='function')d.close();else d.removeAttribute('open');}}
+  dialogs.forEach(function(d){
+    d.addEventListener('close',function(){
+      document.documentElement.classList.remove('dlg-lock');
+      if(location.hash){try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
+      var btn=document.querySelector('[aria-controls="'+d.id+'"]');if(btn)btn.focus();
+    });
+    d.querySelector('.dlg-close').addEventListener('click',function(){close(d);});
+    d.addEventListener('click',function(e){if(e.target===d)close(d);});
+  });
+  document.querySelectorAll('.case-open').forEach(function(b){
+    b.addEventListener('click',function(){open(document.getElementById(b.getAttribute('aria-controls')),true);});
+  });
+  function fromHash(){
+    var art=location.hash&&document.getElementById(location.hash.slice(1));
+    if(art&&art.classList.contains('case')){art.scrollIntoView({block:'center'});open(art.querySelector('.case-dialog'),false);}
+  }
+  fromHash();
+  window.addEventListener('hashchange',fromHash);
 })();
 
 /* 前後對比滑桿 */

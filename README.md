@@ -48,3 +48,4 @@ GitHub Pages 的 `pages build and deployment` 工作流程會從 `main` 建置�
 ## 交接紀錄
 - 2026-10-15：由 ChatGPT Sites 搬到 GitHub Pages（Claude）。移除舊的平台內建訪客統計，待之後改裝 GA4。
 - 2026-10-20：安裝 GA4（評估 ID：G-67135LKMFE，資源「Aries 作品集」），index.html 與 updates.html 的 <head> 皆已加入 gtag.js（Claude）。新增頁面時記得一併加入。
+- 2026-10-20：案例改為「卡片摘要＋詳情視窗」（`.case-grid`／`<dialog class="case-dialog">`，網址 `#case-xxx` 可直接開啟）；首頁新增「我怎麼導入 AI」5 步驟（`#method`，遊戲公司模式排在探索區之後）；新增案例「個人 AI 作業系統」（data-mission 07）與「規劃中的專案」區塊。check.py 改為確認案例原文逐段保留（Claude）。

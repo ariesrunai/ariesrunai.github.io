@@ -17,7 +17,7 @@ sections = {}
 for match in re.finditer(r'<section\b[^>]*>.*?</section>', source, re.S):
     section_id = re.search(r'\bid="([^"]+)"', match[0]).group(1)
     sections[section_id] = match[0]
-assert set(sections) == set(pages) | {"hero"}
+assert set(sections) == set(pages) | {"hero", "method"}
 main_start = source.index('<main id="top">')
 main_end = source.index('</main>', main_start) + len('</main>')
 home_intro = source[main_start:source.index('<div id="flow">')]

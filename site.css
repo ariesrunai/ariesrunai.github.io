@@ -595,3 +595,4 @@ html.dlg-lock{overflow:hidden}
 @media(max-width:600px){.method{grid-template-columns:1fr}}
 
 .code-link{margin-top:12px;display:flex;gap:12px}.code-link a{color:var(--cyan);font-size:14px}
+.demo-panel{display:grid;gap:12px}.demo-gif{display:block;width:100%;max-width:704px;height:auto;border:1px solid var(--line)}

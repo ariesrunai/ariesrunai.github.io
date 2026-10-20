@@ -447,6 +447,11 @@
             <p class="cap">實作上分兩層把關：先用關鍵字規則攔截明確越權的問題（例如人資詢問報價），其餘問題再交給 Claude 依全域與部門規則判斷回應。</p>
             <div class="tv-links code-link"><a href="https://github.com/ariesrunai/aster-ai-dept-assistant" target="_blank" rel="noopener">查看原型程式碼（GitHub）↗</a></div>
           </div>
+          <div class="panel demo-panel">
+            <p class="label" style="margin:0">實際操作畫面</p>
+            <img class="demo-gif" src="/media/dept-ai-demo.gif" alt="部門 AI 助理實際操作：人資助理被問到割草機報價、業務助理被問到同事特休，兩者都拒答並說明原因、建議轉介窗口" width="704" height="522" loading="lazy">
+            <p class="cap">本機執行的原型錄影｜示範跨部門提問被第一層規則攔截：人資問報價、業務問特休，都拒答並轉介。</p>
+          </div>
           <div class="my-role"><h4>我的角色</h4><p>需求定義與架構決策。設計三層規則架構、撰寫部門規則、規劃並驗收雙向測試（程式由 Claude Code 協作實作）</p></div>
           <div class="pbr">
             <div><h4>PROBLEM</h4><p>通用 AI 助理沒有部門邊界，有跨部門資訊外洩與越權回答的風險。</p></div>

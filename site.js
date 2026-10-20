@@ -64,7 +64,7 @@ document.getElementById('copy')?.addEventListener('click',function(){
   window.addEventListener('hashchange',fromHash);
 })();
 
-/* 雲月 3D：點擊後才載入模型檢視器與 GLB（約 7MB），案例視窗與 IP 頁共用 */
+/* 雲月 3D：區塊進入畫面時自動載入並旋轉（約 2MB）；不支援自動偵測時保留按鈕，案例視窗與 IP 頁共用 */
 (function(){
   var btns=Array.from(document.querySelectorAll('.yy-3d-load'));
   if(!btns.length) return;
@@ -79,21 +79,27 @@ document.getElementById('copy')?.addEventListener('click',function(){
     });
     return lib;
   }
-  btns.forEach(function(btn){
-    btn.addEventListener('click',function(){
+  function start(btn){
+      if(btn.dataset.started) return; btn.dataset.started='1';
       var stage=btn.closest('.yy-3d-stage');
       btn.disabled=true; btn.textContent='載入中…';
       loadLib().then(function(){
         var mv=document.createElement('model-viewer');
-        mv.setAttribute('src','/media/yunyue/yunyue-v2.glb');
+        mv.setAttribute('src','/media/yunyue/yunyue-v2-web.glb');
         mv.setAttribute('alt','雲月靜態 3D 模型，可拖曳旋轉、滾輪縮放');
         mv.setAttribute('camera-controls',''); mv.setAttribute('auto-rotate',''); mv.setAttribute('shadow-intensity','0.6');
-        mv.setAttribute('exposure','1.05'); mv.className='yy-mv';
+        mv.setAttribute('exposure','1.05'); mv.setAttribute('camera-orbit','90deg 80deg auto'); mv.setAttribute('rotation-per-second','18deg'); mv.className='yy-mv';
         stage.innerHTML=''; stage.appendChild(mv);
         var tip=document.createElement('p'); tip.className='cap'; tip.textContent='拖曳旋轉・滾輪或雙指縮放';
         stage.appendChild(tip);
-      },function(){btn.disabled=false;btn.textContent='載入失敗，點此重試';});
-    });
+      },function(){btn.disabled=false;delete btn.dataset.started;btn.textContent='載入失敗，點此重試';});
+  }
+  var io='IntersectionObserver' in window ? new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){io.unobserve(e.target);start(e.target.querySelector('.yy-3d-load'));}});
+  },{rootMargin:'200px'}) : null;
+  btns.forEach(function(btn){
+    btn.addEventListener('click',function(){start(btn);});
+    if(io) io.observe(btn.closest('.yy-3d-stage'));
   });
 })();
 

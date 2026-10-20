@@ -628,3 +628,4 @@ html.dlg-lock{overflow:hidden}
 #lab .yy-3d-stage{max-width:760px;justify-self:center;width:100%}
 #lab .yy-mv{height:440px}
 @media(max-width:820px){.yy-intro{grid-template-columns:1fr}#lab .yy-mv{height:320px}}
+.yy-wip{color:#FFC979;font-weight:700}

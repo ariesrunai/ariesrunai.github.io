@@ -42,7 +42,7 @@ document.getElementById('copy')?.addEventListener('click',function(){
     if(scroll){var hub=document.getElementById('explore');if(hub)hub.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}
   }
   btns.forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.aud,true);ariesTrack('audience_'+b.dataset.aud);});});
-  var initial='game';try{initial=sessionStorage.getItem('aries-audience')||initial;}catch(e){}
+  var initial='ai';try{initial=sessionStorage.getItem('aries-audience')||initial;}catch(e){}
   apply(initial,false);
 })();
 

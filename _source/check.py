@@ -68,6 +68,13 @@ for key in ["hero", "cases", "works", "lab", "services", "about", "contact"]:
             renamed = {"Laboratory", "實驗室", "原創角色與互動實驗。"}
             if frag and not re.fullmatch(r"Mission \d+", frag) and not (key == "lab" and frag in renamed):
                 assert frag in new, (key + " text lost", frag)
+    elif key == "hero":
+        # 2026-10-27 首屏改為 AI 導入定位（標題、副標、首屏錄影），文字刻意更新；只確認區塊存在。
+        assert words(section(source)), key
+    elif key == "about":
+        # 2026-10-27 工具標籤移除 Canva、Photoshop（不屬熟練工具），其餘文字須保留。
+        base = words(section(baseline)).replace("Canva", "").replace("Photoshop", "")
+        assert re.sub(r"\s+", "", base) == re.sub(r"\s+", "", words(section(source))), key
     else:
         assert words(section(baseline)) == words(section(source)), key
 

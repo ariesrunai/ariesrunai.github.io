@@ -66,6 +66,8 @@ for key in ["hero", "cases", "works", "lab", "services", "about", "contact"]:
             frag = re.sub(r"\s+", " ", frag).strip()
             # 2026-10-21 實驗室改名「雲月 IP」，舊標題文字刻意替換
             renamed = {"Laboratory", "實驗室", "原創角色與互動實驗。"}
+            # 2026-10-28 統一用詞：品牌海報指標「需重新生成」改為與首頁一致的「需整張重做」
+            frag = frag.replace("需要重新生成", "需要整張重做、重新生成").replace("需重新生成", "需整張重做").replace("重新生成比例 =", "需整張重做比例 =")
             if frag and not re.fullmatch(r"Mission \d+", frag) and not (key == "lab" and frag in renamed):
                 assert frag in new, (key + " text lost", frag)
     elif key == "hero":

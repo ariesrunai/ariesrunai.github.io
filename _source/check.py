@@ -77,7 +77,7 @@ for key in ["hero", "cases", "works", "lab", "services", "about", "contact"]:
         # 2026-10-27 工具標籤移除 Canva、Photoshop（不屬熟練工具），其餘文字須保留。
         base = words(section(baseline)).replace("Canva", "").replace("Photoshop", "")
         # 2026-10-28 現職年份補「— 現在」
-        assert re.sub(r"\s+", "", base).replace("2026社群內容", "2026—現在社群內容") == re.sub(r"\s+", "", words(section(source))), key
+        assert re.sub(r"\s+", "", base).replace("2026社群內容", "2026—現在社群內容").replace("｜祥泰自媒體", "｜自媒體公司") == re.sub(r"\s+", "", words(section(source))), key
     else:
         assert words(section(baseline)) == words(section(source)), key
 

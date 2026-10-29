@@ -386,7 +386,7 @@
   "products": ["產品A", "產品B"],
   "image_type": "product_combo",
   "status": "ready_for_image"
-}</code></pre><p class="cap">8 種貼文類型、7 種行銷階段、8 個製作狀態皆為固定值；修改任何欄位需雙方同步，不能單方面變更。</p></div></div>
+}</code></pre><p class="cap">8 種貼文類型、7 種活動階段、8 個製作狀態皆為固定值；修改任何欄位需雙方同步，不能單方面變更。</p></div></div>
             <div><h4>RESULT</h4><p>跑完 14 篇、8 種貼文類型的完整流程，產出可重複使用的交接格式、文案規格範本與雙 AI 同步回報機制。</p></div>
           </div>
           <div class="tags"><span class="tag">Multi-AI 協作</span><span class="tag">JSON Schema</span><span class="tag">內容日曆</span><span class="tag">Prompt 設計</span></div>
@@ -447,7 +447,7 @@
               <div class="layer full"><span class="who">CLAUDE API</span><br>依規則做語意層級的權限判斷後回應</div>
             </div>
             <p class="cap">架構示意｜Next.js＋TypeScript＋Claude API，以 Claude Code 協作開發</p>
-            <p class="cap">實作上分兩層把關：先用關鍵字規則攔截明確越權的問題（例如人資詢問報價），其餘問題再交給 Claude 依全域與部門規則判斷回應。</p>
+            <p class="cap">規則「分三層存放」（全域、部門、知識庫）；回答時「分兩道把關」：第一道用關鍵字規則攔截 8 類明確越權的問題（人資與業務各 4 類，例如人資問報價、業務承諾折扣或查特休），其餘問題再交給 Claude 依三層規則判斷回應。</p>
             <div class="tv-links code-link"><a href="https://github.com/ariesrunai/aster-ai-dept-assistant" target="_blank" rel="noopener">查看原型程式碼（GitHub）↗</a></div>
           </div>
           <div class="panel demo-panel">
@@ -645,7 +645,7 @@
         <figure class="shot"><div class="frame"><img src="/img/visual-03.png" alt="電動割草車左右對照，整合產品特色與適用情境" loading="lazy" width="1254" height="1254"></div><figcaption>雙機型差異比較<span>電動割草車左右對照，整合產品特色與適用情境</span></figcaption></figure>
         <figure class="shot"><div class="frame"><img src="/img/visual-04.png" alt="電池園藝工具搭配產品型號與功能圖示，呈現品牌系列感" loading="lazy" width="1254" height="1254"></div><figcaption>產品主視覺與賣點圖示<span>電池園藝工具搭配產品型號與功能圖示，呈現品牌系列感</span></figcaption></figure>
       </div>
-      <p class="note">同一主題會延伸成方形、3:4、9:16、3:2 等比例，對應貼文、限時動態與橫式廣告。更多作品可在合作洽詢時另行提供。</p>
+      <p class="note">同一主題會延伸成方形、3:4、9:16、3:2 等比例，對應貼文、限時動態與橫式廣告。更多作品可於來信時另行提供。</p>
     </section>
 
     <!-- LAB：雲月 IP -->
@@ -698,43 +698,10 @@
           <p>求職期間以全職職位為優先，亦可討論單次專案合作。</p>
         </div>
       </div>
-      <details class="service-details" id="servicesDetails"><summary>查看合作服務</summary>
-      <div class="consult">
-        <div>
-          <span class="badge">AI 導入諮詢</span>
-          <h3>想開始用 AI，不知道從哪裡下手？</h3>
-          <p>適合個人工作者與小團隊。一次約 60–90 分鐘的線上討論，會後提供一份「AI 導入建議」，讓你帶走可以馬上執行的下一步。</p>
-          <ul>
-            <li>哪些工作適合交給 AI、哪些不適合</li>
-            <li>建議使用的工具與分工方式</li>
-            <li>第一步可以馬上開始做的事</li>
-            <li>需要注意的風險：資料外洩、品質把關</li>
-          </ul>
-          <p style="font-size:14px">這套方法來自我自己每天用三個 AI 分工完成工作的經驗，實際做法可以看 <a href="/cases.html">專案案例</a>。</p>
-        </div>
-        <ol aria-label="諮詢流程">
-          <li><div><b>事前問卷</b><span>先了解你的工作內容與痛點</span></div></li>
-          <li><div><b>線上討論</b><span>60–90 分鐘，一起拆解哪些環節能導入 AI</span></div></li>
-          <li><div><b>交付導入建議</b><span>會後 3 天內提供一份書面建議</span></div></li>
-          <li><div><b>一次追問回覆</b><span>開始執行後遇到問題，可以再問一次</span></div></li>
-        </ol>
+      <div class="panel">
+        <p>目前以 AI 專案協調、AI 導入相關的全職職位為優先。若有單次的 AI 流程整理或 SOP 規劃需求，也歡迎來信討論範圍與時程。</p>
+        <p style="margin-top:12px"><a class="btn" href="/contact.html">聯絡我</a></p>
       </div>
-      <div class="svc">
-        <div><h3>AI 商業海報與商品視覺</h3><p>以官方產品圖為基準，產出社群貼文、商品介紹與多比例版位素材。</p></div>
-        <div><h3>社群貼文與廣告文案</h3><p>依品牌語氣規劃貼文類型、文案、Hashtag 與行動呼籲。</p></div>
-        <div><h3>AI 內容流程與 SOP 整理</h3><p>把你現在的 AI 使用方式整理成提示詞、品質標準與交接流程。</p></div>
-        <div><h3>素材歸檔與版本管理規劃</h3><p>設計雲端資料夾分類、檔名規則與舊版封存方式。</p></div>
-        <div><h3>月度內容日曆規劃</h3><p>規劃一整個月的發文節奏與主題，避免斷更或整月硬賣商品。</p></div>
-        <div><h3>社群活動企劃</h3><p>線上社群經營與線下活動的規劃、宣傳與現場執行。</p></div>
-      </div>
-      <ol class="steps" aria-label="合作流程">
-        <li><b>需求確認</b><span>用途、版位、交付格式</span></li>
-        <li><b>報價與時程</b><span>依需求報價</span></li>
-        <li><b>製作初稿</b><span>依確認的方向產出</span></li>
-        <li><b>修改調整</b><span>依約定次數修正</span></li>
-        <li><b>交付歸檔</b><span>依比例與版本命名</span></li>
-      </ol>
-      </details>
     </section>
 
     <!-- ABOUT -->
@@ -770,7 +737,7 @@
     <section class="block" id="contact">
       <div class="contact">
         <div>
-          <h2>有內容或 AI 導入想聊聊？</h2>
+          <h2>職缺邀約或合作洽詢</h2>
           <p>歡迎來信說明需求，我會在兩個工作天內回覆。</p>
 
         </div>

@@ -26,7 +26,7 @@ document.getElementById('copy')?.addEventListener('click',function(){
 /* 身分偏好跨頁保存；儲存不可用時仍可正常瀏覽。 */
 (function(){
   var MISSIONS={game:['04','06','08','01','02','05','03','07'],ai:['01','03','02','07','04','05','06','08'],client:['01','08','02','03','07','04','05','06']};
-  var ORDER={game:['cases','about','works','lab','services','updates','contact'],ai:['cases','about','services','works','lab','updates','contact'],client:['works','lab','services','cases','about','updates','contact']};
+  var ORDER={game:['cases','about','works','lab','services','updates','contact'],ai:['cases','about','works','lab','updates','services','contact'],client:['works','lab','services','cases','about','updates','contact']};
   var btns=Array.from(document.querySelectorAll('[data-aud]'));
   var cases=document.querySelector('#cases .case-grid')||document.getElementById('cases'), cards={};
   if(cases)cases.querySelectorAll('[data-mission]').forEach(function(card){cards[card.dataset.mission]=card;});

@@ -331,7 +331,7 @@
   "products": ["產品A", "產品B"],
   "image_type": "product_combo",
   "status": "ready_for_image"
-}</code></pre><p class="cap">8 種貼文類型、7 種行銷階段、8 個製作狀態皆為固定值；修改任何欄位需雙方同步，不能單方面變更。</p></div></div>
+}</code></pre><p class="cap">8 種貼文類型、7 種活動階段、8 個製作狀態皆為固定值；修改任何欄位需雙方同步，不能單方面變更。</p></div></div>
             <div><h4>RESULT</h4><p>跑完 14 篇、8 種貼文類型的完整流程，產出可重複使用的交接格式、文案規格範本與雙 AI 同步回報機制。</p></div>
           </div>
           <div class="tags"><span class="tag">Multi-AI 協作</span><span class="tag">JSON Schema</span><span class="tag">內容日曆</span><span class="tag">Prompt 設計</span></div>
@@ -392,7 +392,7 @@
               <div class="layer full"><span class="who">CLAUDE API</span><br>依規則做語意層級的權限判斷後回應</div>
             </div>
             <p class="cap">架構示意｜Next.js＋TypeScript＋Claude API，以 Claude Code 協作開發</p>
-            <p class="cap">實作上分兩層把關：先用關鍵字規則攔截明確越權的問題（例如人資詢問報價），其餘問題再交給 Claude 依全域與部門規則判斷回應。</p>
+            <p class="cap">規則「分三層存放」（全域、部門、知識庫）；回答時「分兩道把關」：第一道用關鍵字規則攔截 8 類明確越權的問題（人資與業務各 4 類，例如人資問報價、業務承諾折扣或查特休），其餘問題再交給 Claude 依三層規則判斷回應。</p>
             <div class="tv-links code-link"><a href="https://github.com/ariesrunai/aster-ai-dept-assistant" target="_blank" rel="noopener">查看原型程式碼（GitHub）↗</a></div>
           </div>
           <div class="panel demo-panel">
@@ -590,7 +590,7 @@
   </button>
 </aside>
 
-<script src="/site.js?v=5df769a3" defer></script>
+<script src="/site.js?v=5459a140" defer></script>
 
 <script src="/updates.js?v=99efaf06" defer></script>
 </body>

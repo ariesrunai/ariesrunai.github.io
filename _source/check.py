@@ -68,6 +68,10 @@ for key in ["hero", "cases", "works", "lab", "services", "about", "contact"]:
             renamed = {"Laboratory", "實驗室", "原創角色與互動實驗。"}
             # 2026-10-28 統一用詞：品牌海報指標「需重新生成」改為與首頁一致的「需整張重做」
             frag = frag.replace("需要重新生成", "需要整張重做、重新生成").replace("需重新生成", "需整張重做").replace("重新生成比例 =", "需整張重做比例 =")
+            # 2026-10-29 用詞統一與部門 AI 助理說明改寫（8 類攔截、三層／兩道）
+            frag = frag.replace("7 種行銷階段", "7 種活動階段")
+            if frag.startswith("實作上分兩層把關"):
+                frag = "8 類明確越權"
             if frag and not re.fullmatch(r"Mission \d+", frag) and not (key == "lab" and frag in renamed):
                 assert frag in new, (key + " text lost", frag)
     elif key == "hero":
@@ -78,12 +82,20 @@ for key in ["hero", "cases", "works", "lab", "services", "about", "contact"]:
         base = words(section(baseline)).replace("Canva", "").replace("Photoshop", "")
         # 2026-10-28 現職年份補「— 現在」
         assert re.sub(r"\s+", "", base).replace("2026社群內容", "2026—現在社群內容").replace("｜祥泰自媒體", "｜自媒體公司") == re.sub(r"\s+", "", words(section(source))), key
+    elif key == "services":
+        # 2026-10-29 合作服務縮為一段說明（求職期間以全職為主），接案細節刻意移除；只確認區塊存在。
+        assert words(section(source)), key
     else:
-        assert words(section(baseline)) == words(section(source)), key
+        # 2026-10-29 「合作洽詢」舊用語改為職缺邀約用語
+        base = words(section(baseline)).replace("更多作品可在合作洽詢時另行提供。", "更多作品可於來信時另行提供。").replace("有內容或 AI 導入想聊聊？", "職缺邀約或合作洽詢")
+        assert base == words(section(source)), key
 
 assert not subprocess.check_output(
     ["git", "diff", "89e7c1488a6e393d38edf12fc5c603ec97cf9171", "--",
-     "img", "og.png", "updates.js", "updates.css"],
+     # 2026-10-29 作品圖與品管前後對照圖刻意模糊公司品牌 Logo，排除這 6 張
+     "img", "og.png", "updates.js", "updates.css",
+     ":(exclude)img/visual-01.png", ":(exclude)img/visual-02.png", ":(exclude)img/visual-03.png",
+     ":(exclude)img/visual-04.png", ":(exclude)img/ba-before.jpg", ":(exclude)img/ba-after.jpg"],
     cwd=ROOT,
 ), "Original assets or updates data changed"
 print("PASS: 8 pages; deterministic build; headings, IDs, links, GA4, original content/assets.")

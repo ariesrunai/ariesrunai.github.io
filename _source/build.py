@@ -12,7 +12,7 @@ pages = {
     "services": ("合作服務", "求職期間以全職職位為優先，亦可討論單次專案合作。"),
     "about": ("相關經歷", "2017 年起累積社群與內容經驗，橫跨電商、自媒體、社群經營與 AI 內容製作。"),
     "updates": ("更新日誌", "重要通知、作品與專案進度。"),
-    "contact": ("聯絡", "有內容或 AI 導入想聊聊？歡迎來信說明需求。"),
+    "contact": ("聯絡", "職缺邀約或合作洽詢，歡迎來信。"),
 }
 sections = {}
 for match in re.finditer(r'<section\b[^>]*>.*?</section>', source, re.S):
